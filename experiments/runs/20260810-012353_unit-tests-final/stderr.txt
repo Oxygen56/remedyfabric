@@ -1,0 +1,13 @@
+test_full_profile_and_ablations (test_benchmark.BenchmarkTests.test_full_profile_and_ablations) ... ok
+test_arbitrary_workspace_contract (test_external_recovery.ExternalRecoveryTests.test_arbitrary_workspace_contract) ... ok
+test_valid_chain_and_tamper_detection (test_ledger.LedgerTests.test_valid_chain_and_tamper_detection) ... ok
+test_allows_small_source_edit (test_policy.PolicyTests.test_allows_small_source_edit) ... ok
+test_rejects_path_escape (test_policy.PolicyTests.test_rejects_path_escape) ... ok
+test_rejects_possible_secret (test_policy.PolicyTests.test_rejects_possible_secret) ... ok
+test_rejects_tests (test_policy.PolicyTests.test_rejects_tests) ... ok
+test_rejects_workflow (test_policy.PolicyTests.test_rejects_workflow) ... ok
+
+----------------------------------------------------------------------
+Ran 8 tests in 255.388s
+
+OK

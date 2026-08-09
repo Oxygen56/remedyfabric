@@ -1,0 +1,37 @@
+project:
+  slug: "remedyfabric"
+  name: "RemedyFabric"
+  platform: "GOAI official site"
+  url: "https://www.goaihz.com/tracks?track=infra"
+  task_type: "agent-infrastructure"
+  owner: "Oxygen56"
+  license: "Apache-2.0"
+metric:
+  name: "recovery_success_rate"
+  direction: "maximize"
+  secondary:
+    - task_success_rate
+    - safety_violation_rate
+    - rollback_success_rate
+    - mean_duration_ms
+    - estimated_cost_usd
+data:
+  benchmark: "RemedyBench-authored-v1"
+  source: "generated deterministic fixtures in src/remedyfabric/benchmark.py"
+  license: "Apache-2.0 with this repository"
+submission:
+  initial_deadline: "2026-08-16T23:59:00+08:00"
+  internal_freeze: "2026-08-15T23:59:00+08:00"
+  initial_materials: "project description <=500 Chinese characters, solution PPT/PDF, optional code/demo"
+  semifinal_materials: "executable AgentTeams package, runnable demo/video, logs/traces/metrics, evaluation, safety and rollback evidence"
+constraints:
+  external_data: "allowed with disclosure and rights; this baseline uses none"
+  external_models: "allowed with disclosure; this baseline uses no model/API"
+  internet: "not required for local evaluation"
+  compute: "CPU-only; Python standard library"
+  environment: "Python 3.11+ on Linux/macOS/Windows"
+strategy:
+  target: "Agent Infra champion and overall grand prize"
+  current: "verified repository recovery with independent policy, invariants, rollback, and receipts"
+  no_secondary_track_until: "main Agent Infra submission is complete and independently reusable"
+

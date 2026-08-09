@@ -1,0 +1,2 @@
+#!/usr/bin/env bash
+exec python3 "/Users/oxygen/.codex/skills/competition-war-room/scripts/contestctl.py" "$@"

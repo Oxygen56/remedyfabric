@@ -1,0 +1,2 @@
+IMAGEIO FFMPEG_WRITER WARNING: input image is not divisible by macro_block_size=16, resizing from (1920, 1080) to (1920, 1088) to ensure video compatibility with most codecs and players. To prevent resizing, make your input image divisible by the macro_block_size or set the macro_block_size to 1 (risking incompatibility).
+[vost#0:0/libx264 @ 0x119604080] Multiple -pix_fmt options specified for stream 0, only the last option '-pix_fmt yuv420p' will be used.

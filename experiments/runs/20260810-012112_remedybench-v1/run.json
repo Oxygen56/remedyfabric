@@ -1,0 +1,25 @@
+{
+  "run_id": "20260810-012112_remedybench-v1",
+  "name": "remedybench-v1",
+  "command": [
+    ".venv/bin/python",
+    "-m",
+    "remedyfabric",
+    "benchmark",
+    "--output",
+    "artifacts/benchmark.json"
+  ],
+  "returncode": 0,
+  "duration_sec": 64.699,
+  "metric": "task_success_rate",
+  "score": 1.0,
+  "direction": "maximize",
+  "tags": "benchmark,ablation,safety",
+  "notes": "Eight authored incidents across full and four ablation profiles",
+  "created_at": "2026-08-10T01:22:17",
+  "git": {
+    "commit": "",
+    "branch": "",
+    "status": ""
+  }
+}
