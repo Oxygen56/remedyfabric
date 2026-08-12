@@ -14,6 +14,8 @@ artifacts/external-evidence/
 artifacts/*.tmp
 dist/
 build/
+buidl/
+submission/*.zip
 tmp/
 .env
 .DS_Store
