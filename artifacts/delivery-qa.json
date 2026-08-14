@@ -1,7 +1,7 @@
 {
   "schema_version": "remedyfabric.delivery-qa.v2",
-  "verified_at_utc": "2026-08-14T17:49:29.324179Z",
-  "presentation_contract_sha256": "7ac1095983e0340194844f70c9025edad475f749a37bcf8e07c9090d1d0a37cb",
+  "verified_at_utc": "2026-08-14T18:09:03.073058Z",
+  "presentation_contract_sha256": "56556f9735fccedb964cd9a32cc49034fcffe511d1e1ecc9021e8d8a2002ddf9",
   "caption_contract_sha256": "2a814e8f9dac1c7b2c8c6d239a115cab7dcde5c7c03b06f462493e89355f5257",
   "evidence_bindings": {
     "resilient": {
@@ -36,13 +36,13 @@
     },
     "agentteams": {
       "path": "artifacts/agentteams-live-evidence.json",
-      "sha256": "210b3c4717043b92b2175003704d879085b8ea8f5f50442ad548025f8d4293ba",
-      "size_bytes": 383040
+      "sha256": "a9f220f929785a77dc529dd380accbe1f0624613a5c7a3418523db26a0069644",
+      "size_bytes": 383043
     },
     "clean": {
       "path": "artifacts/clean-replay.json",
       "binding": "strict-semantic-projection-v1",
-      "sha256": "5481aa2c0a0cd7baf5ed9247d2be3b21fc33a21ce834e6eeef9e73ed728f211f"
+      "sha256": "f1c51cd5d1945b3cf57446921c478381cab333e76f67e6fc5be3ff6fe41ce49a"
     }
   },
   "passed": true,
@@ -76,7 +76,7 @@
   },
   "pdf": {
     "path": "output/pdf/remedyfabric-goai-agent-infra-champion.pdf",
-    "sha256": "7285275188cdea2ee0df94cc7a9b76681da6345177b08791b8193da5e4220773",
+    "sha256": "60febcddf964c5fba3cc229bb020fbcf90a0a45d3f5ab6efb1600625ea384aa9",
     "size_bytes": 80407,
     "pages": 9,
     "page_text_sha256": [
@@ -142,7 +142,7 @@
         "NOT CLAIMED": true
       }
     },
-    "presentation_contract_sha256": "7ac1095983e0340194844f70c9025edad475f749a37bcf8e07c9090d1d0a37cb",
+    "presentation_contract_sha256": "56556f9735fccedb964cd9a32cc49034fcffe511d1e1ecc9021e8d8a2002ddf9",
     "structure_passed": true,
     "text_contract_passed": true,
     "inspection_error": null,
@@ -150,7 +150,7 @@
   },
   "video": {
     "path": "artifacts/remedyfabric-champion-demo.mp4",
-    "sha256": "cfba9faf27c559a8c08adc372010579ab24945fcae47a19e293eac59c8eef1b6",
+    "sha256": "c155850177e72cd5bf186dc7d98c093b2037959f2e1ce3db76c631d3fef739c7",
     "size_bytes": 3934038,
     "duration_seconds": 49.0,
     "video_codec": "h264",
@@ -163,7 +163,7 @@
     "subtitle_codec": "mov_text",
     "subtitle_cue_count": 7,
     "subtitle_payload_sha256": "85697c148b4c3abd6145b44d6d8e6b0e56a485dcd3f191ec5f8e3135ee3a9718",
-    "presentation_contract_sha256": "7ac1095983e0340194844f70c9025edad475f749a37bcf8e07c9090d1d0a37cb",
+    "presentation_contract_sha256": "56556f9735fccedb964cd9a32cc49034fcffe511d1e1ecc9021e8d8a2002ddf9",
     "caption_contract_sha256": "2a814e8f9dac1c7b2c8c6d239a115cab7dcde5c7c03b06f462493e89355f5257",
     "structure_passed": true,
     "caption_contract_passed": true,
@@ -173,17 +173,17 @@
   },
   "preview": {
     "path": "artifacts/video-preview.jpg",
-    "sha256": "0e40ab077342c9173c79bcf136ffe98f10d477a9e0282e1fd2b1168cd595fc68",
-    "size_bytes": 301751,
+    "sha256": "7aa568320dce66b3467466ecb11fe829d2a9dda100293a6a2151ffc9921dbe81",
+    "size_bytes": 301779,
     "format": "JPEG",
     "width": 1920,
     "height": 1080,
     "tile_count": 9,
     "video_scene_tile_count": 7,
-    "source_video_sha256": "cfba9faf27c559a8c08adc372010579ab24945fcae47a19e293eac59c8eef1b6",
+    "source_video_sha256": "c155850177e72cd5bf186dc7d98c093b2037959f2e1ce3db76c631d3fef739c7",
     "caption_contract_sha256": "2a814e8f9dac1c7b2c8c6d239a115cab7dcde5c7c03b06f462493e89355f5257",
-    "metadata_sha256": "b68b0c223f41834adf156d7fbb453d959f5bbd46d0c97b25aa7934ac8051b8ed",
-    "presentation_contract_sha256": "7ac1095983e0340194844f70c9025edad475f749a37bcf8e07c9090d1d0a37cb",
+    "metadata_sha256": "0df2e6c1eb475f82c65d148eabb6f66f7254d08450960cc0fea37421c5517bd9",
+    "presentation_contract_sha256": "56556f9735fccedb964cd9a32cc49034fcffe511d1e1ecc9021e8d8a2002ddf9",
     "contact_sheet_matches_video": true,
     "metadata_matches_contract": true,
     "inspection_error": null,
@@ -192,7 +192,7 @@
   },
   "dashboard": {
     "path": "artifacts/dashboard.html",
-    "sha256": "82a1dced0a27d8f61cc6b258d9f60955a3a1ac43c1038b20f7b07f8875749123",
+    "sha256": "df94b01578ebc360cf1f29353869191a92ee9d6d16f85c00b8fd18e7fd7742ff",
     "size_bytes": 7692,
     "utf8": true,
     "remote_asset_count": 0,
@@ -211,7 +211,7 @@
       "python3 scripts/run_faultbench_micro_replays.py": true,
       "python3 scripts/champion_gate.py": true
     },
-    "presentation_contract_sha256": "7ac1095983e0340194844f70c9025edad475f749a37bcf8e07c9090d1d0a37cb",
+    "presentation_contract_sha256": "56556f9735fccedb964cd9a32cc49034fcffe511d1e1ecc9021e8d8a2002ddf9",
     "structure_passed": true,
     "text_contract_passed": true,
     "inspection_error": null,
