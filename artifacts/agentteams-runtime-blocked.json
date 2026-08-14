@@ -1,0 +1,106 @@
+{
+  "schema_version": "1.0",
+  "status": "blocked",
+  "validated_live_round": false,
+  "observed_at_utc": "2026-08-12T13:10:12Z",
+  "upstream": {
+    "repository": "https://github.com/agentscope-ai/AgentTeams",
+    "tag": "v1.2.2",
+    "commit": "849182af8e017168a5a200a87b1062142caf462d"
+  },
+  "isolated_runtime": {
+    "profile": "goai-agentteams",
+    "docker_context": "colima-goai-agentteams",
+    "cpu": 4,
+    "memory_gib": 4,
+    "disk_gib": 60,
+    "default_profile_modified": false
+  },
+  "official_components_observed_running": [
+    {
+      "role": "controller",
+      "image": "higress-registry.cn-hangzhou.cr.aliyuncs.com/agentteams/agentteams-embedded:v1.2.2",
+      "digest": "sha256:c7e467bfa5a2a733ea021c19f223180eef85e3e534873feceb8a7a132253125f"
+    },
+    {
+      "role": "manager",
+      "image": "higress-registry.cn-hangzhou.cr.aliyuncs.com/agentteams/agentteams-manager-copaw:v1.2.2",
+      "digest": "sha256:ebf80c4b8296b11ac1bc295329740542fb4c9c0365273019ad70062138477518"
+    },
+    {
+      "role": "worker",
+      "minimum_simultaneously_observed": 3,
+      "names": ["rf-lead", "rf-proposer-b", "rf-challenger"],
+      "image": "higress-registry.cn-hangzhou.cr.aliyuncs.com/agentteams/agentteams-qwenpaw-worker:v1.2.2",
+      "digest": "sha256:5a8c60926009551f7ce555f657d63c8791450196a79ab41ba8bafd2e1bd51834"
+    }
+  ],
+  "model_provider": {
+    "provider": "local Ollama",
+    "model": "qwen2.5:0.5b",
+    "cost_usd": 0,
+    "commercial_api_used": false,
+    "direct_probe": {
+      "http_status": 200,
+      "model_content_observed": true,
+      "content_preview": "PONG"
+    },
+    "official_higress_gateway_probe": {
+      "http_status": 503,
+      "model_content_observed": false
+    },
+    "runtime_provider_route": "Direct local-provider route was configured after the gateway failure; the official runtime did not complete a Manager-to-Worker round before the bounded stop.",
+    "gateway_success_claimed": false
+  },
+  "matrix_attempts": [
+    {
+      "request_event_id": "$r5Ejnl8JbRRZyFnvMtCaSK-KNLmrknxLaMH89umuAdE",
+      "manager_event_id": "$FGh3PxWX5zVoyl8RF5t9yJgsG1Vxr32TvBNNSUpz3Jc",
+      "result": "manager_internal_error",
+      "upstream_http_status": 503
+    },
+    {
+      "request_event_id": "$532533WNOKoBtLbsSMNeJZFpk9tnyBAphXOuI0VHewI",
+      "manager_event_id": "$feUCwHQf7HGuDAW-pzEfTA_GGRbD81ROYH5-kNlbg_4",
+      "result": "manager_internal_error",
+      "upstream_http_status": 503
+    }
+  ],
+  "orchestration": {
+    "manager_request_events": 2,
+    "manager_non_error_task_events": 0,
+    "worker_response_events": 0,
+    "manager_to_worker_round_proven": false
+  },
+  "acl_probe": {
+    "path": "GET /api/v1/managers",
+    "actor": "team-leader rf-lead service-account token",
+    "official_component": "AgentTeams Controller v1.2.2",
+    "expected": "deny",
+    "http_status": 403,
+    "observed": "authorization denied: team-leader rf-lead cannot list manager",
+    "response_sha256": "944326915d5f27001926a0e76686cead21daeac7d1d737c1353a06e741eb9937",
+    "passed": true
+  },
+  "alibaba_cloud_skill": {
+    "repository": "https://github.com/aliyun/alibabacloud-aiops-skills",
+    "commit": "11c388200696beba342009e9c87bfeae38cd5c63",
+    "skill": "alibabacloud-resourcecenter-search",
+    "package_verified": true,
+    "assigned_to_worker": "rf-verifier",
+    "cloud_credentials_read": false,
+    "cloud_api_invoked": false,
+    "live_cloud_run_claimed": false
+  },
+  "blocking_reason": "The official runtime and ACL path ran, but the official Higress model route returned HTTP 503 and no Worker-authored Matrix response was observed. Therefore a real Manager-to-Worker orchestration round is not proven.",
+  "champion_gate": {
+    "agentteams_ready": false,
+    "live_evidence_artifact_created": false,
+    "submission_claim_allowed": false
+  },
+  "secrets": {
+    "credentials_in_artifact": false,
+    "raw_runtime_environment_included": false,
+    "raw_private_logs_included": false
+  }
+}

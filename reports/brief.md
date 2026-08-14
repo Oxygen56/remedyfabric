@@ -12,16 +12,16 @@ Win the Agent Infra track and compete for the overall grand prize with a judge-r
 
 ## Problem contract
 
-Autonomous repair agents can generate plausible patches, but teams lack an infrastructure layer that proves what failed, limits blast radius, independently validates the candidate, rolls back failure, and produces inspectable evidence. RemedyFabric treats repair as a controlled transaction across four specialized agents.
+Autonomous repair agents can generate plausible patches, but teams lack an infrastructure layer that proves what failed, limits blast radius, role-separates validation, rolls back failure, and produces inspectable evidence. RemedyFabric treats repair as a controlled transaction across three proposal Workers, two Verifiers, a Challenger, a Governor, and a separately authorized Release Manager.
 
 Success means a judge can clone the repository, run one command without credentials, observe both successful repairs and adversarial rejection/rollback, inspect receipts, and reproduce every reported metric.
 
 ## Scope
 
-- AgentTeams-aligned Triage, Repair, Governor and Verifier identities.
+- AgentTeams-aligned leader, dual proposers, dual Verifiers, Challenger, Governor, and Release Manager identities.
 - Typed patch Skill contract, deterministic offline provider and replaceable model-provider boundary.
 - Isolated bounded command execution, policy decision, snapshot, rollback and hash-chained evidence.
-- Transparent authored benchmark, negative controls and four ablation profiles.
+- Transparent 22-trial repository matrix, 20,748-state finite checker, negative controls, and four comparison profiles.
 - Public Apache-2.0 repository, documentation, dashboard and video.
 
 ## Non-goals
@@ -40,4 +40,3 @@ Success means a judge can clone the repository, run one command without credenti
 5. Public repository is cloneable and CI is green.
 6. Video shows a real clean run; no mocked terminal output.
 7. Submission receipt or success page is captured before claiming submission.
-

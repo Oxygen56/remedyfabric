@@ -19,3 +19,10 @@ submission/*.zip
 tmp/
 .env
 .DS_Store
+artifacts/faultbench-source-verification.raw.json
+# HEAD-bound release receipts are generated only after the frozen commit exists.
+artifacts/public-ci.json
+artifacts/clean-release-ci.zip
+artifacts/champion-evidence.json
+artifacts/champion-gate.json
+artifacts/clean-replay.json

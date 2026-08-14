@@ -1,0 +1,2213 @@
+{
+  "schema_version": "1.0",
+  "status": "verified",
+  "provider": "GitHub official REST API",
+  "api_version": "2022-11-28",
+  "verified_at": "2026-08-12T10:43:54.702008+00:00",
+  "dataset": "faultbench/cases.json",
+  "dataset_sha256": "cf3a2556fa0f6819ccc2a05b74deaea452294984afbcee7e130b9665af18a1ab",
+  "raw_receipt_publication": "local-only; the public summary retains its SHA-256 and all compared fields",
+  "raw_receipt_sha256": "1b72fbeaac487906d855d97d8e14d86872ee3aa2d82abd19ef3cb4841ee606d3",
+  "case_count": 30,
+  "repository_count": 6,
+  "failed_case_ids": [],
+  "validations": [
+    {
+      "case_id": "flask-6096",
+      "repository": "pallets/flask",
+      "pr_api_endpoint": "repos/pallets/flask/pulls/6096",
+      "commit_api_endpoint": "repos/pallets/flask/commits/05e9c6bd630ecf4ec0ec884b1fc7901663737bc7",
+      "license_api_endpoint": "repos/pallets/flask/license",
+      "issue_api_endpoint": "repos/pallets/flask/issues/6093",
+      "checks": [
+        {
+          "field": "pull.html_url",
+          "expected": "https://github.com/pallets/flask/pull/6096",
+          "observed": "https://github.com/pallets/flask/pull/6096",
+          "passed": true
+        },
+        {
+          "field": "pull.number",
+          "expected": 6096,
+          "observed": 6096,
+          "passed": true
+        },
+        {
+          "field": "pull.state",
+          "expected": "closed",
+          "observed": "closed",
+          "passed": true
+        },
+        {
+          "field": "pull.merged",
+          "expected": true,
+          "observed": true,
+          "passed": true
+        },
+        {
+          "field": "pull.title",
+          "expected": "Fix `.partition(\":\")` usage on potential IPv6 addresses",
+          "observed": "Fix `.partition(\":\")` usage on potential IPv6 addresses",
+          "passed": true
+        },
+        {
+          "field": "pull.merged_at",
+          "expected": "2026-08-11T19:48:41Z",
+          "observed": "2026-08-11T19:48:41Z",
+          "passed": true
+        },
+        {
+          "field": "pull.merge_commit_sha",
+          "expected": "05e9c6bd630ecf4ec0ec884b1fc7901663737bc7",
+          "observed": "05e9c6bd630ecf4ec0ec884b1fc7901663737bc7",
+          "passed": true
+        },
+        {
+          "field": "commit.sha",
+          "expected": "05e9c6bd630ecf4ec0ec884b1fc7901663737bc7",
+          "observed": "05e9c6bd630ecf4ec0ec884b1fc7901663737bc7",
+          "passed": true
+        },
+        {
+          "field": "commit.html_url",
+          "expected": "https://github.com/pallets/flask/commit/05e9c6bd630ecf4ec0ec884b1fc7901663737bc7",
+          "observed": "https://github.com/pallets/flask/commit/05e9c6bd630ecf4ec0ec884b1fc7901663737bc7",
+          "passed": true
+        },
+        {
+          "field": "repository.license.spdx_id",
+          "expected": "BSD-3-Clause",
+          "observed": "BSD-3-Clause",
+          "passed": true
+        },
+        {
+          "field": "issue.html_url",
+          "expected": "https://github.com/pallets/flask/issues/6093",
+          "observed": "https://github.com/pallets/flask/issues/6093",
+          "passed": true
+        }
+      ],
+      "passed": true
+    },
+    {
+      "case_id": "flask-5917",
+      "repository": "pallets/flask",
+      "pr_api_endpoint": "repos/pallets/flask/pulls/5917",
+      "commit_api_endpoint": "repos/pallets/flask/commits/12e95c93b488725f80753f34b2e0d24838ca4646",
+      "license_api_endpoint": "repos/pallets/flask/license",
+      "issue_api_endpoint": "repos/pallets/flask/issues/5916",
+      "checks": [
+        {
+          "field": "pull.html_url",
+          "expected": "https://github.com/pallets/flask/pull/5917",
+          "observed": "https://github.com/pallets/flask/pull/5917",
+          "passed": true
+        },
+        {
+          "field": "pull.number",
+          "expected": 5917,
+          "observed": 5917,
+          "passed": true
+        },
+        {
+          "field": "pull.state",
+          "expected": "closed",
+          "observed": "closed",
+          "passed": true
+        },
+        {
+          "field": "pull.merged",
+          "expected": true,
+          "observed": true,
+          "passed": true
+        },
+        {
+          "field": "pull.title",
+          "expected": "fix provide_automatic_options override",
+          "observed": "fix provide_automatic_options override",
+          "passed": true
+        },
+        {
+          "field": "pull.merged_at",
+          "expected": "2026-02-12T21:07:51Z",
+          "observed": "2026-02-12T21:07:51Z",
+          "passed": true
+        },
+        {
+          "field": "pull.merge_commit_sha",
+          "expected": "12e95c93b488725f80753f34b2e0d24838ca4646",
+          "observed": "12e95c93b488725f80753f34b2e0d24838ca4646",
+          "passed": true
+        },
+        {
+          "field": "commit.sha",
+          "expected": "12e95c93b488725f80753f34b2e0d24838ca4646",
+          "observed": "12e95c93b488725f80753f34b2e0d24838ca4646",
+          "passed": true
+        },
+        {
+          "field": "commit.html_url",
+          "expected": "https://github.com/pallets/flask/commit/12e95c93b488725f80753f34b2e0d24838ca4646",
+          "observed": "https://github.com/pallets/flask/commit/12e95c93b488725f80753f34b2e0d24838ca4646",
+          "passed": true
+        },
+        {
+          "field": "repository.license.spdx_id",
+          "expected": "BSD-3-Clause",
+          "observed": "BSD-3-Clause",
+          "passed": true
+        },
+        {
+          "field": "issue.html_url",
+          "expected": "https://github.com/pallets/flask/issues/5916",
+          "observed": "https://github.com/pallets/flask/issues/5916",
+          "passed": true
+        }
+      ],
+      "passed": true
+    },
+    {
+      "case_id": "flask-3299",
+      "repository": "pallets/flask",
+      "pr_api_endpoint": "repos/pallets/flask/pulls/3299",
+      "commit_api_endpoint": "repos/pallets/flask/commits/d694eb443a6243e248df974e9cd64defb591bf38",
+      "license_api_endpoint": "repos/pallets/flask/license",
+      "issue_api_endpoint": "repos/pallets/flask/issues/3297",
+      "checks": [
+        {
+          "field": "pull.html_url",
+          "expected": "https://github.com/pallets/flask/pull/3299",
+          "observed": "https://github.com/pallets/flask/pull/3299",
+          "passed": true
+        },
+        {
+          "field": "pull.number",
+          "expected": 3299,
+          "observed": 3299,
+          "passed": true
+        },
+        {
+          "field": "pull.state",
+          "expected": "closed",
+          "observed": "closed",
+          "passed": true
+        },
+        {
+          "field": "pull.merged",
+          "expected": true,
+          "observed": true,
+          "passed": true
+        },
+        {
+          "field": "pull.title",
+          "expected": "pass sys.argv to flask cli",
+          "observed": "pass sys.argv to flask cli",
+          "passed": true
+        },
+        {
+          "field": "pull.merged_at",
+          "expected": "2019-07-10T19:42:59Z",
+          "observed": "2019-07-10T19:42:59Z",
+          "passed": true
+        },
+        {
+          "field": "pull.merge_commit_sha",
+          "expected": "d694eb443a6243e248df974e9cd64defb591bf38",
+          "observed": "d694eb443a6243e248df974e9cd64defb591bf38",
+          "passed": true
+        },
+        {
+          "field": "commit.sha",
+          "expected": "d694eb443a6243e248df974e9cd64defb591bf38",
+          "observed": "d694eb443a6243e248df974e9cd64defb591bf38",
+          "passed": true
+        },
+        {
+          "field": "commit.html_url",
+          "expected": "https://github.com/pallets/flask/commit/d694eb443a6243e248df974e9cd64defb591bf38",
+          "observed": "https://github.com/pallets/flask/commit/d694eb443a6243e248df974e9cd64defb591bf38",
+          "passed": true
+        },
+        {
+          "field": "repository.license.spdx_id",
+          "expected": "BSD-3-Clause",
+          "observed": "BSD-3-Clause",
+          "passed": true
+        },
+        {
+          "field": "issue.html_url",
+          "expected": "https://github.com/pallets/flask/issues/3297",
+          "observed": "https://github.com/pallets/flask/issues/3297",
+          "passed": true
+        }
+      ],
+      "passed": true
+    },
+    {
+      "case_id": "flask-2739",
+      "repository": "pallets/flask",
+      "pr_api_endpoint": "repos/pallets/flask/pulls/2739",
+      "commit_api_endpoint": "repos/pallets/flask/commits/4c8ec8f555af8aeba5a48c3c4cd9cc39c74dce8f",
+      "license_api_endpoint": "repos/pallets/flask/license",
+      "issue_api_endpoint": null,
+      "checks": [
+        {
+          "field": "pull.html_url",
+          "expected": "https://github.com/pallets/flask/pull/2739",
+          "observed": "https://github.com/pallets/flask/pull/2739",
+          "passed": true
+        },
+        {
+          "field": "pull.number",
+          "expected": 2739,
+          "observed": 2739,
+          "passed": true
+        },
+        {
+          "field": "pull.state",
+          "expected": "closed",
+          "observed": "closed",
+          "passed": true
+        },
+        {
+          "field": "pull.merged",
+          "expected": true,
+          "observed": true,
+          "passed": true
+        },
+        {
+          "field": "pull.title",
+          "expected": "Only trap key errors by default in debug, not all BadRequest errors",
+          "observed": "Only trap key errors by default in debug, not all BadRequest errors",
+          "passed": true
+        },
+        {
+          "field": "pull.merged_at",
+          "expected": "2018-04-28T14:01:43Z",
+          "observed": "2018-04-28T14:01:43Z",
+          "passed": true
+        },
+        {
+          "field": "pull.merge_commit_sha",
+          "expected": "4c8ec8f555af8aeba5a48c3c4cd9cc39c74dce8f",
+          "observed": "4c8ec8f555af8aeba5a48c3c4cd9cc39c74dce8f",
+          "passed": true
+        },
+        {
+          "field": "commit.sha",
+          "expected": "4c8ec8f555af8aeba5a48c3c4cd9cc39c74dce8f",
+          "observed": "4c8ec8f555af8aeba5a48c3c4cd9cc39c74dce8f",
+          "passed": true
+        },
+        {
+          "field": "commit.html_url",
+          "expected": "https://github.com/pallets/flask/commit/4c8ec8f555af8aeba5a48c3c4cd9cc39c74dce8f",
+          "observed": "https://github.com/pallets/flask/commit/4c8ec8f555af8aeba5a48c3c4cd9cc39c74dce8f",
+          "passed": true
+        },
+        {
+          "field": "repository.license.spdx_id",
+          "expected": "BSD-3-Clause",
+          "observed": "BSD-3-Clause",
+          "passed": true
+        }
+      ],
+      "passed": true
+    },
+    {
+      "case_id": "flask-2738",
+      "repository": "pallets/flask",
+      "pr_api_endpoint": "repos/pallets/flask/pulls/2738",
+      "commit_api_endpoint": "repos/pallets/flask/commits/27d56c1df5fc977e17806b466dc74dfa9a98689b",
+      "license_api_endpoint": "repos/pallets/flask/license",
+      "issue_api_endpoint": null,
+      "checks": [
+        {
+          "field": "pull.html_url",
+          "expected": "https://github.com/pallets/flask/pull/2738",
+          "observed": "https://github.com/pallets/flask/pull/2738",
+          "passed": true
+        },
+        {
+          "field": "pull.number",
+          "expected": 2738,
+          "observed": 2738,
+          "passed": true
+        },
+        {
+          "field": "pull.state",
+          "expected": "closed",
+          "observed": "closed",
+          "passed": true
+        },
+        {
+          "field": "pull.merged",
+          "expected": true,
+          "observed": true,
+          "passed": true
+        },
+        {
+          "field": "pull.title",
+          "expected": "merge slashes between blueprint prefix and rule",
+          "observed": "merge slashes between blueprint prefix and rule",
+          "passed": true
+        },
+        {
+          "field": "pull.merged_at",
+          "expected": "2018-04-27T19:46:38Z",
+          "observed": "2018-04-27T19:46:38Z",
+          "passed": true
+        },
+        {
+          "field": "pull.merge_commit_sha",
+          "expected": "27d56c1df5fc977e17806b466dc74dfa9a98689b",
+          "observed": "27d56c1df5fc977e17806b466dc74dfa9a98689b",
+          "passed": true
+        },
+        {
+          "field": "commit.sha",
+          "expected": "27d56c1df5fc977e17806b466dc74dfa9a98689b",
+          "observed": "27d56c1df5fc977e17806b466dc74dfa9a98689b",
+          "passed": true
+        },
+        {
+          "field": "commit.html_url",
+          "expected": "https://github.com/pallets/flask/commit/27d56c1df5fc977e17806b466dc74dfa9a98689b",
+          "observed": "https://github.com/pallets/flask/commit/27d56c1df5fc977e17806b466dc74dfa9a98689b",
+          "passed": true
+        },
+        {
+          "field": "repository.license.spdx_id",
+          "expected": "BSD-3-Clause",
+          "observed": "BSD-3-Clause",
+          "passed": true
+        }
+      ],
+      "passed": true
+    },
+    {
+      "case_id": "requests-7431",
+      "repository": "psf/requests",
+      "pr_api_endpoint": "repos/psf/requests/pulls/7431",
+      "commit_api_endpoint": "repos/psf/requests/commits/e511bc72777a94c45d004e010c597925092e1efe",
+      "license_api_endpoint": "repos/psf/requests/license",
+      "issue_api_endpoint": null,
+      "checks": [
+        {
+          "field": "pull.html_url",
+          "expected": "https://github.com/psf/requests/pull/7431",
+          "observed": "https://github.com/psf/requests/pull/7431",
+          "passed": true
+        },
+        {
+          "field": "pull.number",
+          "expected": 7431,
+          "observed": 7431,
+          "passed": true
+        },
+        {
+          "field": "pull.state",
+          "expected": "closed",
+          "observed": "closed",
+          "passed": true
+        },
+        {
+          "field": "pull.merged",
+          "expected": true,
+          "observed": true,
+          "passed": true
+        },
+        {
+          "field": "pull.title",
+          "expected": "Fix mutability issues with headers input types",
+          "observed": "Fix mutability issues with headers input types",
+          "passed": true
+        },
+        {
+          "field": "pull.merged_at",
+          "expected": "2026-05-13T19:16:50Z",
+          "observed": "2026-05-13T19:16:50Z",
+          "passed": true
+        },
+        {
+          "field": "pull.merge_commit_sha",
+          "expected": "e511bc72777a94c45d004e010c597925092e1efe",
+          "observed": "e511bc72777a94c45d004e010c597925092e1efe",
+          "passed": true
+        },
+        {
+          "field": "commit.sha",
+          "expected": "e511bc72777a94c45d004e010c597925092e1efe",
+          "observed": "e511bc72777a94c45d004e010c597925092e1efe",
+          "passed": true
+        },
+        {
+          "field": "commit.html_url",
+          "expected": "https://github.com/psf/requests/commit/e511bc72777a94c45d004e010c597925092e1efe",
+          "observed": "https://github.com/psf/requests/commit/e511bc72777a94c45d004e010c597925092e1efe",
+          "passed": true
+        },
+        {
+          "field": "repository.license.spdx_id",
+          "expected": "Apache-2.0",
+          "observed": "Apache-2.0",
+          "passed": true
+        }
+      ],
+      "passed": true
+    },
+    {
+      "case_id": "requests-7502",
+      "repository": "psf/requests",
+      "pr_api_endpoint": "repos/psf/requests/pulls/7502",
+      "commit_api_endpoint": "repos/psf/requests/commits/6f205ff422bccd5e4c4fc0b64c5f3e7df5181db6",
+      "license_api_endpoint": "repos/psf/requests/license",
+      "issue_api_endpoint": null,
+      "checks": [
+        {
+          "field": "pull.html_url",
+          "expected": "https://github.com/psf/requests/pull/7502",
+          "observed": "https://github.com/psf/requests/pull/7502",
+          "passed": true
+        },
+        {
+          "field": "pull.number",
+          "expected": 7502,
+          "observed": 7502,
+          "passed": true
+        },
+        {
+          "field": "pull.state",
+          "expected": "closed",
+          "observed": "closed",
+          "passed": true
+        },
+        {
+          "field": "pull.merged",
+          "expected": true,
+          "observed": true,
+          "passed": true
+        },
+        {
+          "field": "pull.title",
+          "expected": "Fix `_encode_files` detection for `__getattr__`-based file wrappers",
+          "observed": "Fix `_encode_files` detection for `__getattr__`-based file wrappers",
+          "passed": true
+        },
+        {
+          "field": "pull.merged_at",
+          "expected": "2026-06-08T20:52:51Z",
+          "observed": "2026-06-08T20:52:51Z",
+          "passed": true
+        },
+        {
+          "field": "pull.merge_commit_sha",
+          "expected": "6f205ff422bccd5e4c4fc0b64c5f3e7df5181db6",
+          "observed": "6f205ff422bccd5e4c4fc0b64c5f3e7df5181db6",
+          "passed": true
+        },
+        {
+          "field": "commit.sha",
+          "expected": "6f205ff422bccd5e4c4fc0b64c5f3e7df5181db6",
+          "observed": "6f205ff422bccd5e4c4fc0b64c5f3e7df5181db6",
+          "passed": true
+        },
+        {
+          "field": "commit.html_url",
+          "expected": "https://github.com/psf/requests/commit/6f205ff422bccd5e4c4fc0b64c5f3e7df5181db6",
+          "observed": "https://github.com/psf/requests/commit/6f205ff422bccd5e4c4fc0b64c5f3e7df5181db6",
+          "passed": true
+        },
+        {
+          "field": "repository.license.spdx_id",
+          "expected": "Apache-2.0",
+          "observed": "Apache-2.0",
+          "passed": true
+        }
+      ],
+      "passed": true
+    },
+    {
+      "case_id": "requests-7433",
+      "repository": "psf/requests",
+      "pr_api_endpoint": "repos/psf/requests/pulls/7433",
+      "commit_api_endpoint": "repos/psf/requests/commits/6404f345e562d962abe6700a1c357ec1e7e18232",
+      "license_api_endpoint": "repos/psf/requests/license",
+      "issue_api_endpoint": "repos/psf/requests/issues/7432",
+      "checks": [
+        {
+          "field": "pull.html_url",
+          "expected": "https://github.com/psf/requests/pull/7433",
+          "observed": "https://github.com/psf/requests/pull/7433",
+          "passed": true
+        },
+        {
+          "field": "pull.number",
+          "expected": 7433,
+          "observed": 7433,
+          "passed": true
+        },
+        {
+          "field": "pull.state",
+          "expected": "closed",
+          "observed": "closed",
+          "passed": true
+        },
+        {
+          "field": "pull.merged",
+          "expected": true,
+          "observed": true,
+          "passed": true
+        },
+        {
+          "field": "pull.title",
+          "expected": "Fix `prepare_body` stream detection for `__getattr__`-based file wrappers",
+          "observed": "Fix `prepare_body` stream detection for `__getattr__`-based file wrappers",
+          "passed": true
+        },
+        {
+          "field": "pull.merged_at",
+          "expected": "2026-05-12T17:51:02Z",
+          "observed": "2026-05-12T17:51:02Z",
+          "passed": true
+        },
+        {
+          "field": "pull.merge_commit_sha",
+          "expected": "6404f345e562d962abe6700a1c357ec1e7e18232",
+          "observed": "6404f345e562d962abe6700a1c357ec1e7e18232",
+          "passed": true
+        },
+        {
+          "field": "commit.sha",
+          "expected": "6404f345e562d962abe6700a1c357ec1e7e18232",
+          "observed": "6404f345e562d962abe6700a1c357ec1e7e18232",
+          "passed": true
+        },
+        {
+          "field": "commit.html_url",
+          "expected": "https://github.com/psf/requests/commit/6404f345e562d962abe6700a1c357ec1e7e18232",
+          "observed": "https://github.com/psf/requests/commit/6404f345e562d962abe6700a1c357ec1e7e18232",
+          "passed": true
+        },
+        {
+          "field": "repository.license.spdx_id",
+          "expected": "Apache-2.0",
+          "observed": "Apache-2.0",
+          "passed": true
+        },
+        {
+          "field": "issue.html_url",
+          "expected": "https://github.com/psf/requests/issues/7432",
+          "observed": "https://github.com/psf/requests/issues/7432",
+          "passed": true
+        }
+      ],
+      "passed": true
+    },
+    {
+      "case_id": "requests-7308",
+      "repository": "psf/requests",
+      "pr_api_endpoint": "repos/psf/requests/pulls/7308",
+      "commit_api_endpoint": "repos/psf/requests/commits/bc7dd0fc4d56e808bcdd85ac2d797b3107c89259",
+      "license_api_endpoint": "repos/psf/requests/license",
+      "issue_api_endpoint": null,
+      "checks": [
+        {
+          "field": "pull.html_url",
+          "expected": "https://github.com/psf/requests/pull/7308",
+          "observed": "https://github.com/psf/requests/pull/7308",
+          "passed": true
+        },
+        {
+          "field": "pull.number",
+          "expected": 7308,
+          "observed": 7308,
+          "passed": true
+        },
+        {
+          "field": "pull.state",
+          "expected": "closed",
+          "observed": "closed",
+          "passed": true
+        },
+        {
+          "field": "pull.merged",
+          "expected": true,
+          "observed": true,
+          "passed": true
+        },
+        {
+          "field": "pull.title",
+          "expected": "Fix cosmetic header validity parsing regex",
+          "observed": "Fix cosmetic header validity parsing regex",
+          "passed": true
+        },
+        {
+          "field": "pull.merged_at",
+          "expected": "2026-03-30T15:24:49Z",
+          "observed": "2026-03-30T15:24:49Z",
+          "passed": true
+        },
+        {
+          "field": "pull.merge_commit_sha",
+          "expected": "bc7dd0fc4d56e808bcdd85ac2d797b3107c89259",
+          "observed": "bc7dd0fc4d56e808bcdd85ac2d797b3107c89259",
+          "passed": true
+        },
+        {
+          "field": "commit.sha",
+          "expected": "bc7dd0fc4d56e808bcdd85ac2d797b3107c89259",
+          "observed": "bc7dd0fc4d56e808bcdd85ac2d797b3107c89259",
+          "passed": true
+        },
+        {
+          "field": "commit.html_url",
+          "expected": "https://github.com/psf/requests/commit/bc7dd0fc4d56e808bcdd85ac2d797b3107c89259",
+          "observed": "https://github.com/psf/requests/commit/bc7dd0fc4d56e808bcdd85ac2d797b3107c89259",
+          "passed": true
+        },
+        {
+          "field": "repository.license.spdx_id",
+          "expected": "Apache-2.0",
+          "observed": "Apache-2.0",
+          "passed": true
+        }
+      ],
+      "passed": true
+    },
+    {
+      "case_id": "requests-7309",
+      "repository": "psf/requests",
+      "pr_api_endpoint": "repos/psf/requests/pulls/7309",
+      "commit_api_endpoint": "repos/psf/requests/commits/f0198e6dfc431a2293dc16e1b1e8fcddc910a7f3",
+      "license_api_endpoint": "repos/psf/requests/license",
+      "issue_api_endpoint": null,
+      "checks": [
+        {
+          "field": "pull.html_url",
+          "expected": "https://github.com/psf/requests/pull/7309",
+          "observed": "https://github.com/psf/requests/pull/7309",
+          "passed": true
+        },
+        {
+          "field": "pull.number",
+          "expected": 7309,
+          "observed": 7309,
+          "passed": true
+        },
+        {
+          "field": "pull.state",
+          "expected": "closed",
+          "observed": "closed",
+          "passed": true
+        },
+        {
+          "field": "pull.merged",
+          "expected": true,
+          "observed": true,
+          "passed": true
+        },
+        {
+          "field": "pull.title",
+          "expected": "Fix malformed value parsing for Content-Type",
+          "observed": "Fix malformed value parsing for Content-Type",
+          "passed": true
+        },
+        {
+          "field": "pull.merged_at",
+          "expected": "2026-03-30T15:27:35Z",
+          "observed": "2026-03-30T15:27:35Z",
+          "passed": true
+        },
+        {
+          "field": "pull.merge_commit_sha",
+          "expected": "f0198e6dfc431a2293dc16e1b1e8fcddc910a7f3",
+          "observed": "f0198e6dfc431a2293dc16e1b1e8fcddc910a7f3",
+          "passed": true
+        },
+        {
+          "field": "commit.sha",
+          "expected": "f0198e6dfc431a2293dc16e1b1e8fcddc910a7f3",
+          "observed": "f0198e6dfc431a2293dc16e1b1e8fcddc910a7f3",
+          "passed": true
+        },
+        {
+          "field": "commit.html_url",
+          "expected": "https://github.com/psf/requests/commit/f0198e6dfc431a2293dc16e1b1e8fcddc910a7f3",
+          "observed": "https://github.com/psf/requests/commit/f0198e6dfc431a2293dc16e1b1e8fcddc910a7f3",
+          "passed": true
+        },
+        {
+          "field": "repository.license.spdx_id",
+          "expected": "Apache-2.0",
+          "observed": "Apache-2.0",
+          "passed": true
+        }
+      ],
+      "passed": true
+    },
+    {
+      "case_id": "express-5555",
+      "repository": "expressjs/express",
+      "pr_api_endpoint": "repos/expressjs/express/pulls/5555",
+      "commit_api_endpoint": "repos/expressjs/express/commits/116f69a4d11f580d098df0005e1ab3cadb5b5195",
+      "license_api_endpoint": "repos/expressjs/express/license",
+      "issue_api_endpoint": "repos/expressjs/express/issues/5554",
+      "checks": [
+        {
+          "field": "pull.html_url",
+          "expected": "https://github.com/expressjs/express/pull/5555",
+          "observed": "https://github.com/expressjs/express/pull/5555",
+          "passed": true
+        },
+        {
+          "field": "pull.number",
+          "expected": 5555,
+          "observed": 5555,
+          "passed": true
+        },
+        {
+          "field": "pull.state",
+          "expected": "closed",
+          "observed": "closed",
+          "passed": true
+        },
+        {
+          "field": "pull.merged",
+          "expected": true,
+          "observed": true,
+          "passed": true
+        },
+        {
+          "field": "pull.title",
+          "expected": "fix #5554 passing URL instances with new location encoding",
+          "observed": "fix #5554 passing URL instances with new location encoding",
+          "passed": true
+        },
+        {
+          "field": "pull.merged_at",
+          "expected": "2024-03-20T22:10:22Z",
+          "observed": "2024-03-20T22:10:22Z",
+          "passed": true
+        },
+        {
+          "field": "pull.merge_commit_sha",
+          "expected": "116f69a4d11f580d098df0005e1ab3cadb5b5195",
+          "observed": "116f69a4d11f580d098df0005e1ab3cadb5b5195",
+          "passed": true
+        },
+        {
+          "field": "commit.sha",
+          "expected": "116f69a4d11f580d098df0005e1ab3cadb5b5195",
+          "observed": "116f69a4d11f580d098df0005e1ab3cadb5b5195",
+          "passed": true
+        },
+        {
+          "field": "commit.html_url",
+          "expected": "https://github.com/expressjs/express/commit/116f69a4d11f580d098df0005e1ab3cadb5b5195",
+          "observed": "https://github.com/expressjs/express/commit/116f69a4d11f580d098df0005e1ab3cadb5b5195",
+          "passed": true
+        },
+        {
+          "field": "repository.license.spdx_id",
+          "expected": "MIT",
+          "observed": "MIT",
+          "passed": true
+        },
+        {
+          "field": "issue.html_url",
+          "expected": "https://github.com/expressjs/express/issues/5554",
+          "observed": "https://github.com/expressjs/express/issues/5554",
+          "passed": true
+        }
+      ],
+      "passed": true
+    },
+    {
+      "case_id": "express-7181",
+      "repository": "expressjs/express",
+      "pr_api_endpoint": "repos/expressjs/express/pulls/7181",
+      "commit_api_endpoint": "repos/expressjs/express/commits/8d09bfe6d88983da5c3e12cfdd54782c4dc675db",
+      "license_api_endpoint": "repos/expressjs/express/license",
+      "issue_api_endpoint": "repos/expressjs/express/issues/7147",
+      "checks": [
+        {
+          "field": "pull.html_url",
+          "expected": "https://github.com/expressjs/express/pull/7181",
+          "observed": "https://github.com/expressjs/express/pull/7181",
+          "passed": true
+        },
+        {
+          "field": "pull.number",
+          "expected": 7181,
+          "observed": 7181,
+          "passed": true
+        },
+        {
+          "field": "pull.state",
+          "expected": "closed",
+          "observed": "closed",
+          "passed": true
+        },
+        {
+          "field": "pull.merged",
+          "expected": true,
+          "observed": true,
+          "passed": true
+        },
+        {
+          "field": "pull.title",
+          "expected": "fix: restore array parsing for req.query repeated keys (#7147)",
+          "observed": "fix: restore array parsing for req.query repeated keys (#7147)",
+          "passed": true
+        },
+        {
+          "field": "pull.merged_at",
+          "expected": "2026-05-08T19:55:03Z",
+          "observed": "2026-05-08T19:55:03Z",
+          "passed": true
+        },
+        {
+          "field": "pull.merge_commit_sha",
+          "expected": "8d09bfe6d88983da5c3e12cfdd54782c4dc675db",
+          "observed": "8d09bfe6d88983da5c3e12cfdd54782c4dc675db",
+          "passed": true
+        },
+        {
+          "field": "commit.sha",
+          "expected": "8d09bfe6d88983da5c3e12cfdd54782c4dc675db",
+          "observed": "8d09bfe6d88983da5c3e12cfdd54782c4dc675db",
+          "passed": true
+        },
+        {
+          "field": "commit.html_url",
+          "expected": "https://github.com/expressjs/express/commit/8d09bfe6d88983da5c3e12cfdd54782c4dc675db",
+          "observed": "https://github.com/expressjs/express/commit/8d09bfe6d88983da5c3e12cfdd54782c4dc675db",
+          "passed": true
+        },
+        {
+          "field": "repository.license.spdx_id",
+          "expected": "MIT",
+          "observed": "MIT",
+          "passed": true
+        },
+        {
+          "field": "issue.html_url",
+          "expected": "https://github.com/expressjs/express/issues/7147",
+          "observed": "https://github.com/expressjs/express/issues/7147",
+          "passed": true
+        }
+      ],
+      "passed": true
+    },
+    {
+      "case_id": "express-4893",
+      "repository": "expressjs/express",
+      "pr_api_endpoint": "repos/expressjs/express/pulls/4893",
+      "commit_api_endpoint": "repos/expressjs/express/commits/18e5985b8a9d5e8423db0a9121f22bdaecd5b120",
+      "license_api_endpoint": "repos/expressjs/express/license",
+      "issue_api_endpoint": null,
+      "checks": [
+        {
+          "field": "pull.html_url",
+          "expected": "https://github.com/expressjs/express/pull/4893",
+          "observed": "https://github.com/expressjs/express/pull/4893",
+          "passed": true
+        },
+        {
+          "field": "pull.number",
+          "expected": 4893,
+          "observed": 4893,
+          "passed": true
+        },
+        {
+          "field": "pull.state",
+          "expected": "closed",
+          "observed": "closed",
+          "passed": true
+        },
+        {
+          "field": "pull.merged",
+          "expected": true,
+          "observed": true,
+          "passed": true
+        },
+        {
+          "field": "pull.title",
+          "expected": "fix(res.send): add Content-Length header only if Transfer-Encoding is not present",
+          "observed": "fix(res.send): add Content-Length header only if Transfer-Encoding is not present",
+          "passed": true
+        },
+        {
+          "field": "pull.merged_at",
+          "expected": "2026-06-16T03:06:32Z",
+          "observed": "2026-06-16T03:06:32Z",
+          "passed": true
+        },
+        {
+          "field": "pull.merge_commit_sha",
+          "expected": "18e5985b8a9d5e8423db0a9121f22bdaecd5b120",
+          "observed": "18e5985b8a9d5e8423db0a9121f22bdaecd5b120",
+          "passed": true
+        },
+        {
+          "field": "commit.sha",
+          "expected": "18e5985b8a9d5e8423db0a9121f22bdaecd5b120",
+          "observed": "18e5985b8a9d5e8423db0a9121f22bdaecd5b120",
+          "passed": true
+        },
+        {
+          "field": "commit.html_url",
+          "expected": "https://github.com/expressjs/express/commit/18e5985b8a9d5e8423db0a9121f22bdaecd5b120",
+          "observed": "https://github.com/expressjs/express/commit/18e5985b8a9d5e8423db0a9121f22bdaecd5b120",
+          "passed": true
+        },
+        {
+          "field": "repository.license.spdx_id",
+          "expected": "MIT",
+          "observed": "MIT",
+          "passed": true
+        }
+      ],
+      "passed": true
+    },
+    {
+      "case_id": "express-6088",
+      "repository": "expressjs/express",
+      "pr_api_endpoint": "repos/expressjs/express/pulls/6088",
+      "commit_api_endpoint": "repos/expressjs/express/commits/6cd404eb28ff861180f435b3015f8d0c8c0b44d4",
+      "license_api_endpoint": "repos/expressjs/express/license",
+      "issue_api_endpoint": null,
+      "checks": [
+        {
+          "field": "pull.html_url",
+          "expected": "https://github.com/expressjs/express/pull/6088",
+          "observed": "https://github.com/expressjs/express/pull/6088",
+          "passed": true
+        },
+        {
+          "field": "pull.number",
+          "expected": 6088,
+          "observed": 6088,
+          "passed": true
+        },
+        {
+          "field": "pull.state",
+          "expected": "closed",
+          "observed": "closed",
+          "passed": true
+        },
+        {
+          "field": "pull.merged",
+          "expected": true,
+          "observed": true,
+          "passed": true
+        },
+        {
+          "field": "pull.title",
+          "expected": "fix: enhance req.acceptsCharsets method",
+          "observed": "fix: enhance req.acceptsCharsets method",
+          "passed": true
+        },
+        {
+          "field": "pull.merged_at",
+          "expected": "2026-01-07T14:41:35Z",
+          "observed": "2026-01-07T14:41:35Z",
+          "passed": true
+        },
+        {
+          "field": "pull.merge_commit_sha",
+          "expected": "6cd404eb28ff861180f435b3015f8d0c8c0b44d4",
+          "observed": "6cd404eb28ff861180f435b3015f8d0c8c0b44d4",
+          "passed": true
+        },
+        {
+          "field": "commit.sha",
+          "expected": "6cd404eb28ff861180f435b3015f8d0c8c0b44d4",
+          "observed": "6cd404eb28ff861180f435b3015f8d0c8c0b44d4",
+          "passed": true
+        },
+        {
+          "field": "commit.html_url",
+          "expected": "https://github.com/expressjs/express/commit/6cd404eb28ff861180f435b3015f8d0c8c0b44d4",
+          "observed": "https://github.com/expressjs/express/commit/6cd404eb28ff861180f435b3015f8d0c8c0b44d4",
+          "passed": true
+        },
+        {
+          "field": "repository.license.spdx_id",
+          "expected": "MIT",
+          "observed": "MIT",
+          "passed": true
+        }
+      ],
+      "passed": true
+    },
+    {
+      "case_id": "express-4205",
+      "repository": "expressjs/express",
+      "pr_api_endpoint": "repos/expressjs/express/pulls/4205",
+      "commit_api_endpoint": "repos/expressjs/express/commits/abb7793ae043328f776d0a4484a72a66a4b0a8bb",
+      "license_api_endpoint": "repos/expressjs/express/license",
+      "issue_api_endpoint": "repos/expressjs/express/issues/4204",
+      "checks": [
+        {
+          "field": "pull.html_url",
+          "expected": "https://github.com/expressjs/express/pull/4205",
+          "observed": "https://github.com/expressjs/express/pull/4205",
+          "passed": true
+        },
+        {
+          "field": "pull.number",
+          "expected": 4205,
+          "observed": 4205,
+          "passed": true
+        },
+        {
+          "field": "pull.state",
+          "expected": "closed",
+          "observed": "closed",
+          "passed": true
+        },
+        {
+          "field": "pull.merged",
+          "expected": true,
+          "observed": true,
+          "passed": true
+        },
+        {
+          "field": "pull.title",
+          "expected": "Fix regexp handing logic in router. Closes #4204",
+          "observed": "Fix regexp handing logic in router. Closes #4204",
+          "passed": true
+        },
+        {
+          "field": "pull.merged_at",
+          "expected": "2020-05-21T02:16:34Z",
+          "observed": "2020-05-21T02:16:34Z",
+          "passed": true
+        },
+        {
+          "field": "pull.merge_commit_sha",
+          "expected": "abb7793ae043328f776d0a4484a72a66a4b0a8bb",
+          "observed": "abb7793ae043328f776d0a4484a72a66a4b0a8bb",
+          "passed": true
+        },
+        {
+          "field": "commit.sha",
+          "expected": "abb7793ae043328f776d0a4484a72a66a4b0a8bb",
+          "observed": "abb7793ae043328f776d0a4484a72a66a4b0a8bb",
+          "passed": true
+        },
+        {
+          "field": "commit.html_url",
+          "expected": "https://github.com/expressjs/express/commit/abb7793ae043328f776d0a4484a72a66a4b0a8bb",
+          "observed": "https://github.com/expressjs/express/commit/abb7793ae043328f776d0a4484a72a66a4b0a8bb",
+          "passed": true
+        },
+        {
+          "field": "repository.license.spdx_id",
+          "expected": "MIT",
+          "observed": "MIT",
+          "passed": true
+        },
+        {
+          "field": "issue.html_url",
+          "expected": "https://github.com/expressjs/express/issues/4204",
+          "observed": "https://github.com/expressjs/express/issues/4204",
+          "passed": true
+        }
+      ],
+      "passed": true
+    },
+    {
+      "case_id": "fastify-6892",
+      "repository": "fastify/fastify",
+      "pr_api_endpoint": "repos/fastify/fastify/pulls/6892",
+      "commit_api_endpoint": "repos/fastify/fastify/commits/27938ac777c15482a81881b29f86c82b025f7fae",
+      "license_api_endpoint": "repos/fastify/fastify/license",
+      "issue_api_endpoint": null,
+      "checks": [
+        {
+          "field": "pull.html_url",
+          "expected": "https://github.com/fastify/fastify/pull/6892",
+          "observed": "https://github.com/fastify/fastify/pull/6892",
+          "passed": true
+        },
+        {
+          "field": "pull.number",
+          "expected": 6892,
+          "observed": 6892,
+          "passed": true
+        },
+        {
+          "field": "pull.state",
+          "expected": "closed",
+          "observed": "closed",
+          "passed": true
+        },
+        {
+          "field": "pull.merged",
+          "expected": true,
+          "observed": true,
+          "passed": true
+        },
+        {
+          "field": "pull.title",
+          "expected": "fix: recognize constructor-assigned built-in properties as decorator …",
+          "observed": "fix: recognize constructor-assigned built-in properties as decorator …",
+          "passed": true
+        },
+        {
+          "field": "pull.merged_at",
+          "expected": "2026-08-08T06:36:43Z",
+          "observed": "2026-08-08T06:36:43Z",
+          "passed": true
+        },
+        {
+          "field": "pull.merge_commit_sha",
+          "expected": "27938ac777c15482a81881b29f86c82b025f7fae",
+          "observed": "27938ac777c15482a81881b29f86c82b025f7fae",
+          "passed": true
+        },
+        {
+          "field": "commit.sha",
+          "expected": "27938ac777c15482a81881b29f86c82b025f7fae",
+          "observed": "27938ac777c15482a81881b29f86c82b025f7fae",
+          "passed": true
+        },
+        {
+          "field": "commit.html_url",
+          "expected": "https://github.com/fastify/fastify/commit/27938ac777c15482a81881b29f86c82b025f7fae",
+          "observed": "https://github.com/fastify/fastify/commit/27938ac777c15482a81881b29f86c82b025f7fae",
+          "passed": true
+        },
+        {
+          "field": "repository.license.spdx_id",
+          "expected": "MIT",
+          "observed": "MIT",
+          "passed": true
+        }
+      ],
+      "passed": true
+    },
+    {
+      "case_id": "fastify-6881",
+      "repository": "fastify/fastify",
+      "pr_api_endpoint": "repos/fastify/fastify/pulls/6881",
+      "commit_api_endpoint": "repos/fastify/fastify/commits/01ca8393b9d10a897f0d2daedbe2f9eb90076ef5",
+      "license_api_endpoint": "repos/fastify/fastify/license",
+      "issue_api_endpoint": null,
+      "checks": [
+        {
+          "field": "pull.html_url",
+          "expected": "https://github.com/fastify/fastify/pull/6881",
+          "observed": "https://github.com/fastify/fastify/pull/6881",
+          "passed": true
+        },
+        {
+          "field": "pull.number",
+          "expected": 6881,
+          "observed": 6881,
+          "passed": true
+        },
+        {
+          "field": "pull.state",
+          "expected": "closed",
+          "observed": "closed",
+          "passed": true
+        },
+        {
+          "field": "pull.merged",
+          "expected": true,
+          "observed": true,
+          "passed": true
+        },
+        {
+          "field": "pull.title",
+          "expected": "fix: uncatchable throws in writeHead when using async hook",
+          "observed": "fix: uncatchable throws in writeHead when using async hook",
+          "passed": true
+        },
+        {
+          "field": "pull.merged_at",
+          "expected": "2026-07-30T09:20:20Z",
+          "observed": "2026-07-30T09:20:20Z",
+          "passed": true
+        },
+        {
+          "field": "pull.merge_commit_sha",
+          "expected": "01ca8393b9d10a897f0d2daedbe2f9eb90076ef5",
+          "observed": "01ca8393b9d10a897f0d2daedbe2f9eb90076ef5",
+          "passed": true
+        },
+        {
+          "field": "commit.sha",
+          "expected": "01ca8393b9d10a897f0d2daedbe2f9eb90076ef5",
+          "observed": "01ca8393b9d10a897f0d2daedbe2f9eb90076ef5",
+          "passed": true
+        },
+        {
+          "field": "commit.html_url",
+          "expected": "https://github.com/fastify/fastify/commit/01ca8393b9d10a897f0d2daedbe2f9eb90076ef5",
+          "observed": "https://github.com/fastify/fastify/commit/01ca8393b9d10a897f0d2daedbe2f9eb90076ef5",
+          "passed": true
+        },
+        {
+          "field": "repository.license.spdx_id",
+          "expected": "MIT",
+          "observed": "MIT",
+          "passed": true
+        }
+      ],
+      "passed": true
+    },
+    {
+      "case_id": "fastify-6838",
+      "repository": "fastify/fastify",
+      "pr_api_endpoint": "repos/fastify/fastify/pulls/6838",
+      "commit_api_endpoint": "repos/fastify/fastify/commits/6682c4f9a76cbb60c372ba5cad9dd2fc6e2fdb51",
+      "license_api_endpoint": "repos/fastify/fastify/license",
+      "issue_api_endpoint": null,
+      "checks": [
+        {
+          "field": "pull.html_url",
+          "expected": "https://github.com/fastify/fastify/pull/6838",
+          "observed": "https://github.com/fastify/fastify/pull/6838",
+          "passed": true
+        },
+        {
+          "field": "pull.number",
+          "expected": 6838,
+          "observed": 6838,
+          "passed": true
+        },
+        {
+          "field": "pull.state",
+          "expected": "closed",
+          "observed": "closed",
+          "passed": true
+        },
+        {
+          "field": "pull.merged",
+          "expected": true,
+          "observed": true,
+          "passed": true
+        },
+        {
+          "field": "pull.title",
+          "expected": "fix: normalize method in findRoute",
+          "observed": "fix: normalize method in findRoute",
+          "passed": true
+        },
+        {
+          "field": "pull.merged_at",
+          "expected": "2026-07-11T14:15:45Z",
+          "observed": "2026-07-11T14:15:45Z",
+          "passed": true
+        },
+        {
+          "field": "pull.merge_commit_sha",
+          "expected": "6682c4f9a76cbb60c372ba5cad9dd2fc6e2fdb51",
+          "observed": "6682c4f9a76cbb60c372ba5cad9dd2fc6e2fdb51",
+          "passed": true
+        },
+        {
+          "field": "commit.sha",
+          "expected": "6682c4f9a76cbb60c372ba5cad9dd2fc6e2fdb51",
+          "observed": "6682c4f9a76cbb60c372ba5cad9dd2fc6e2fdb51",
+          "passed": true
+        },
+        {
+          "field": "commit.html_url",
+          "expected": "https://github.com/fastify/fastify/commit/6682c4f9a76cbb60c372ba5cad9dd2fc6e2fdb51",
+          "observed": "https://github.com/fastify/fastify/commit/6682c4f9a76cbb60c372ba5cad9dd2fc6e2fdb51",
+          "passed": true
+        },
+        {
+          "field": "repository.license.spdx_id",
+          "expected": "MIT",
+          "observed": "MIT",
+          "passed": true
+        }
+      ],
+      "passed": true
+    },
+    {
+      "case_id": "fastify-6845",
+      "repository": "fastify/fastify",
+      "pr_api_endpoint": "repos/fastify/fastify/pulls/6845",
+      "commit_api_endpoint": "repos/fastify/fastify/commits/7299a57d3fdce7da49f2c6d19ba08dc673e53f22",
+      "license_api_endpoint": "repos/fastify/fastify/license",
+      "issue_api_endpoint": null,
+      "checks": [
+        {
+          "field": "pull.html_url",
+          "expected": "https://github.com/fastify/fastify/pull/6845",
+          "observed": "https://github.com/fastify/fastify/pull/6845",
+          "passed": true
+        },
+        {
+          "field": "pull.number",
+          "expected": 6845,
+          "observed": 6845,
+          "passed": true
+        },
+        {
+          "field": "pull.state",
+          "expected": "closed",
+          "observed": "closed",
+          "passed": true
+        },
+        {
+          "field": "pull.merged",
+          "expected": true,
+          "observed": true,
+          "passed": true
+        },
+        {
+          "field": "pull.title",
+          "expected": "fix: clear trailer state when removing all trailers",
+          "observed": "fix: clear trailer state when removing all trailers",
+          "passed": true
+        },
+        {
+          "field": "pull.merged_at",
+          "expected": "2026-08-03T13:37:21Z",
+          "observed": "2026-08-03T13:37:21Z",
+          "passed": true
+        },
+        {
+          "field": "pull.merge_commit_sha",
+          "expected": "7299a57d3fdce7da49f2c6d19ba08dc673e53f22",
+          "observed": "7299a57d3fdce7da49f2c6d19ba08dc673e53f22",
+          "passed": true
+        },
+        {
+          "field": "commit.sha",
+          "expected": "7299a57d3fdce7da49f2c6d19ba08dc673e53f22",
+          "observed": "7299a57d3fdce7da49f2c6d19ba08dc673e53f22",
+          "passed": true
+        },
+        {
+          "field": "commit.html_url",
+          "expected": "https://github.com/fastify/fastify/commit/7299a57d3fdce7da49f2c6d19ba08dc673e53f22",
+          "observed": "https://github.com/fastify/fastify/commit/7299a57d3fdce7da49f2c6d19ba08dc673e53f22",
+          "passed": true
+        },
+        {
+          "field": "repository.license.spdx_id",
+          "expected": "MIT",
+          "observed": "MIT",
+          "passed": true
+        }
+      ],
+      "passed": true
+    },
+    {
+      "case_id": "fastify-6865",
+      "repository": "fastify/fastify",
+      "pr_api_endpoint": "repos/fastify/fastify/pulls/6865",
+      "commit_api_endpoint": "repos/fastify/fastify/commits/29bdcbb91f1318dc90ae8c0e52ab6f4e13c42744",
+      "license_api_endpoint": "repos/fastify/fastify/license",
+      "issue_api_endpoint": null,
+      "checks": [
+        {
+          "field": "pull.html_url",
+          "expected": "https://github.com/fastify/fastify/pull/6865",
+          "observed": "https://github.com/fastify/fastify/pull/6865",
+          "passed": true
+        },
+        {
+          "field": "pull.number",
+          "expected": 6865,
+          "observed": 6865,
+          "passed": true
+        },
+        {
+          "field": "pull.state",
+          "expected": "closed",
+          "observed": "closed",
+          "passed": true
+        },
+        {
+          "field": "pull.merged",
+          "expected": true,
+          "observed": true,
+          "passed": true
+        },
+        {
+          "field": "pull.title",
+          "expected": "fix: honor quoted-string in `Content-Type` parameter values",
+          "observed": "fix: honor quoted-string in `Content-Type` parameter values",
+          "passed": true
+        },
+        {
+          "field": "pull.merged_at",
+          "expected": "2026-07-30T09:22:03Z",
+          "observed": "2026-07-30T09:22:03Z",
+          "passed": true
+        },
+        {
+          "field": "pull.merge_commit_sha",
+          "expected": "29bdcbb91f1318dc90ae8c0e52ab6f4e13c42744",
+          "observed": "29bdcbb91f1318dc90ae8c0e52ab6f4e13c42744",
+          "passed": true
+        },
+        {
+          "field": "commit.sha",
+          "expected": "29bdcbb91f1318dc90ae8c0e52ab6f4e13c42744",
+          "observed": "29bdcbb91f1318dc90ae8c0e52ab6f4e13c42744",
+          "passed": true
+        },
+        {
+          "field": "commit.html_url",
+          "expected": "https://github.com/fastify/fastify/commit/29bdcbb91f1318dc90ae8c0e52ab6f4e13c42744",
+          "observed": "https://github.com/fastify/fastify/commit/29bdcbb91f1318dc90ae8c0e52ab6f4e13c42744",
+          "passed": true
+        },
+        {
+          "field": "repository.license.spdx_id",
+          "expected": "MIT",
+          "observed": "MIT",
+          "passed": true
+        }
+      ],
+      "passed": true
+    },
+    {
+      "case_id": "ripgrep-3475",
+      "repository": "BurntSushi/ripgrep",
+      "pr_api_endpoint": "repos/BurntSushi/ripgrep/pulls/3475",
+      "commit_api_endpoint": "repos/BurntSushi/ripgrep/commits/0d7054d8e466d6aa0a6bb6cf121e87225d26df44",
+      "license_api_endpoint": "repos/BurntSushi/ripgrep/license",
+      "issue_api_endpoint": "repos/BurntSushi/ripgrep/issues/3009",
+      "checks": [
+        {
+          "field": "pull.html_url",
+          "expected": "https://github.com/BurntSushi/ripgrep/pull/3475",
+          "observed": "https://github.com/BurntSushi/ripgrep/pull/3475",
+          "passed": true
+        },
+        {
+          "field": "pull.number",
+          "expected": 3475,
+          "observed": 3475,
+          "passed": true
+        },
+        {
+          "field": "pull.state",
+          "expected": "closed",
+          "observed": "closed",
+          "passed": true
+        },
+        {
+          "field": "pull.merged",
+          "expected": true,
+          "observed": true,
+          "passed": true
+        },
+        {
+          "field": "pull.title",
+          "expected": "ignore: fix deadlock when visitor panics",
+          "observed": "ignore: fix deadlock when visitor panics",
+          "passed": true
+        },
+        {
+          "field": "pull.merged_at",
+          "expected": "2026-07-16T21:33:06Z",
+          "observed": "2026-07-16T21:33:06Z",
+          "passed": true
+        },
+        {
+          "field": "pull.merge_commit_sha",
+          "expected": "0d7054d8e466d6aa0a6bb6cf121e87225d26df44",
+          "observed": "0d7054d8e466d6aa0a6bb6cf121e87225d26df44",
+          "passed": true
+        },
+        {
+          "field": "commit.sha",
+          "expected": "0d7054d8e466d6aa0a6bb6cf121e87225d26df44",
+          "observed": "0d7054d8e466d6aa0a6bb6cf121e87225d26df44",
+          "passed": true
+        },
+        {
+          "field": "commit.html_url",
+          "expected": "https://github.com/BurntSushi/ripgrep/commit/0d7054d8e466d6aa0a6bb6cf121e87225d26df44",
+          "observed": "https://github.com/BurntSushi/ripgrep/commit/0d7054d8e466d6aa0a6bb6cf121e87225d26df44",
+          "passed": true
+        },
+        {
+          "field": "repository.license.spdx_id",
+          "expected": "Unlicense",
+          "observed": "Unlicense",
+          "passed": true
+        },
+        {
+          "field": "issue.html_url",
+          "expected": "https://github.com/BurntSushi/ripgrep/issues/3009",
+          "observed": "https://github.com/BurntSushi/ripgrep/issues/3009",
+          "passed": true
+        }
+      ],
+      "passed": true
+    },
+    {
+      "case_id": "ripgrep-3190",
+      "repository": "BurntSushi/ripgrep",
+      "pr_api_endpoint": "repos/BurntSushi/ripgrep/pulls/3190",
+      "commit_api_endpoint": "repos/BurntSushi/ripgrep/commits/63209ae0b95d31f28d14be5125fba3f61f5835e6",
+      "license_api_endpoint": "repos/BurntSushi/ripgrep/license",
+      "issue_api_endpoint": null,
+      "checks": [
+        {
+          "field": "pull.html_url",
+          "expected": "https://github.com/BurntSushi/ripgrep/pull/3190",
+          "observed": "https://github.com/BurntSushi/ripgrep/pull/3190",
+          "passed": true
+        },
+        {
+          "field": "pull.number",
+          "expected": 3190,
+          "observed": 3190,
+          "passed": true
+        },
+        {
+          "field": "pull.state",
+          "expected": "closed",
+          "observed": "closed",
+          "passed": true
+        },
+        {
+          "field": "pull.merged",
+          "expected": true,
+          "observed": true,
+          "passed": true
+        },
+        {
+          "field": "pull.title",
+          "expected": "printer: fix `--stats` for `--json`",
+          "observed": "printer: fix `--stats` for `--json`",
+          "passed": true
+        },
+        {
+          "field": "pull.merged_at",
+          "expected": "2025-10-16T01:21:20Z",
+          "observed": "2025-10-16T01:21:20Z",
+          "passed": true
+        },
+        {
+          "field": "pull.merge_commit_sha",
+          "expected": "63209ae0b95d31f28d14be5125fba3f61f5835e6",
+          "observed": "63209ae0b95d31f28d14be5125fba3f61f5835e6",
+          "passed": true
+        },
+        {
+          "field": "commit.sha",
+          "expected": "63209ae0b95d31f28d14be5125fba3f61f5835e6",
+          "observed": "63209ae0b95d31f28d14be5125fba3f61f5835e6",
+          "passed": true
+        },
+        {
+          "field": "commit.html_url",
+          "expected": "https://github.com/BurntSushi/ripgrep/commit/63209ae0b95d31f28d14be5125fba3f61f5835e6",
+          "observed": "https://github.com/BurntSushi/ripgrep/commit/63209ae0b95d31f28d14be5125fba3f61f5835e6",
+          "passed": true
+        },
+        {
+          "field": "repository.license.spdx_id",
+          "expected": "Unlicense",
+          "observed": "Unlicense",
+          "passed": true
+        }
+      ],
+      "passed": true
+    },
+    {
+      "case_id": "ripgrep-3195",
+      "repository": "BurntSushi/ripgrep",
+      "pr_api_endpoint": "repos/BurntSushi/ripgrep/pulls/3195",
+      "commit_api_endpoint": "repos/BurntSushi/ripgrep/commits/d47663b1b4548e4fa02d6e4b575718d0f5f5e7d6",
+      "license_api_endpoint": "repos/BurntSushi/ripgrep/license",
+      "issue_api_endpoint": "repos/BurntSushi/ripgrep/issues/3194",
+      "checks": [
+        {
+          "field": "pull.html_url",
+          "expected": "https://github.com/BurntSushi/ripgrep/pull/3195",
+          "observed": "https://github.com/BurntSushi/ripgrep/pull/3195",
+          "passed": true
+        },
+        {
+          "field": "pull.number",
+          "expected": 3195,
+          "observed": 3195,
+          "passed": true
+        },
+        {
+          "field": "pull.state",
+          "expected": "closed",
+          "observed": "closed",
+          "passed": true
+        },
+        {
+          "field": "pull.merged",
+          "expected": true,
+          "observed": true,
+          "passed": true
+        },
+        {
+          "field": "pull.title",
+          "expected": "searcher: fix regression with `--line-buffered` flag",
+          "observed": "searcher: fix regression with `--line-buffered` flag",
+          "passed": true
+        },
+        {
+          "field": "pull.merged_at",
+          "expected": "2025-10-19T15:06:40Z",
+          "observed": "2025-10-19T15:06:40Z",
+          "passed": true
+        },
+        {
+          "field": "pull.merge_commit_sha",
+          "expected": "d47663b1b4548e4fa02d6e4b575718d0f5f5e7d6",
+          "observed": "d47663b1b4548e4fa02d6e4b575718d0f5f5e7d6",
+          "passed": true
+        },
+        {
+          "field": "commit.sha",
+          "expected": "d47663b1b4548e4fa02d6e4b575718d0f5f5e7d6",
+          "observed": "d47663b1b4548e4fa02d6e4b575718d0f5f5e7d6",
+          "passed": true
+        },
+        {
+          "field": "commit.html_url",
+          "expected": "https://github.com/BurntSushi/ripgrep/commit/d47663b1b4548e4fa02d6e4b575718d0f5f5e7d6",
+          "observed": "https://github.com/BurntSushi/ripgrep/commit/d47663b1b4548e4fa02d6e4b575718d0f5f5e7d6",
+          "passed": true
+        },
+        {
+          "field": "repository.license.spdx_id",
+          "expected": "Unlicense",
+          "observed": "Unlicense",
+          "passed": true
+        },
+        {
+          "field": "issue.html_url",
+          "expected": "https://github.com/BurntSushi/ripgrep/issues/3194",
+          "observed": "https://github.com/BurntSushi/ripgrep/issues/3194",
+          "passed": true
+        }
+      ],
+      "passed": true
+    },
+    {
+      "case_id": "ripgrep-3177",
+      "repository": "BurntSushi/ripgrep",
+      "pr_api_endpoint": "repos/BurntSushi/ripgrep/pulls/3177",
+      "commit_api_endpoint": "repos/BurntSushi/ripgrep/commits/f0faa91c68c0d2f8c4b93a5e8546b4d3554f637e",
+      "license_api_endpoint": "repos/BurntSushi/ripgrep/license",
+      "issue_api_endpoint": null,
+      "checks": [
+        {
+          "field": "pull.html_url",
+          "expected": "https://github.com/BurntSushi/ripgrep/pull/3177",
+          "observed": "https://github.com/BurntSushi/ripgrep/pull/3177",
+          "passed": true
+        },
+        {
+          "field": "pull.number",
+          "expected": 3177,
+          "observed": 3177,
+          "passed": true
+        },
+        {
+          "field": "pull.state",
+          "expected": "closed",
+          "observed": "closed",
+          "passed": true
+        },
+        {
+          "field": "pull.merged",
+          "expected": true,
+          "observed": true,
+          "passed": true
+        },
+        {
+          "field": "pull.title",
+          "expected": "fix a few small outstanding bugs",
+          "observed": "fix a few small outstanding bugs",
+          "passed": true
+        },
+        {
+          "field": "pull.merged_at",
+          "expected": "2025-10-11T02:07:00Z",
+          "observed": "2025-10-11T02:07:00Z",
+          "passed": true
+        },
+        {
+          "field": "pull.merge_commit_sha",
+          "expected": "f0faa91c68c0d2f8c4b93a5e8546b4d3554f637e",
+          "observed": "f0faa91c68c0d2f8c4b93a5e8546b4d3554f637e",
+          "passed": true
+        },
+        {
+          "field": "commit.sha",
+          "expected": "f0faa91c68c0d2f8c4b93a5e8546b4d3554f637e",
+          "observed": "f0faa91c68c0d2f8c4b93a5e8546b4d3554f637e",
+          "passed": true
+        },
+        {
+          "field": "commit.html_url",
+          "expected": "https://github.com/BurntSushi/ripgrep/commit/f0faa91c68c0d2f8c4b93a5e8546b4d3554f637e",
+          "observed": "https://github.com/BurntSushi/ripgrep/commit/f0faa91c68c0d2f8c4b93a5e8546b4d3554f637e",
+          "passed": true
+        },
+        {
+          "field": "repository.license.spdx_id",
+          "expected": "Unlicense",
+          "observed": "Unlicense",
+          "passed": true
+        }
+      ],
+      "passed": true
+    },
+    {
+      "case_id": "ripgrep-3174",
+      "repository": "BurntSushi/ripgrep",
+      "pr_api_endpoint": "repos/BurntSushi/ripgrep/pulls/3174",
+      "commit_api_endpoint": "repos/BurntSushi/ripgrep/commits/0407e104f611d623547897ca99d172673b31779f",
+      "license_api_endpoint": "repos/BurntSushi/ripgrep/license",
+      "issue_api_endpoint": "repos/BurntSushi/ripgrep/issues/3173",
+      "checks": [
+        {
+          "field": "pull.html_url",
+          "expected": "https://github.com/BurntSushi/ripgrep/pull/3174",
+          "observed": "https://github.com/BurntSushi/ripgrep/pull/3174",
+          "passed": true
+        },
+        {
+          "field": "pull.number",
+          "expected": 3174,
+          "observed": 3174,
+          "passed": true
+        },
+        {
+          "field": "pull.state",
+          "expected": "closed",
+          "observed": "closed",
+          "passed": true
+        },
+        {
+          "field": "pull.merged",
+          "expected": true,
+          "observed": true,
+          "passed": true
+        },
+        {
+          "field": "pull.title",
+          "expected": "ignore: fix problem with searching whitelisted hidden files",
+          "observed": "ignore: fix problem with searching whitelisted hidden files",
+          "passed": true
+        },
+        {
+          "field": "pull.merged_at",
+          "expected": "2025-10-09T01:16:59Z",
+          "observed": "2025-10-09T01:16:59Z",
+          "passed": true
+        },
+        {
+          "field": "pull.merge_commit_sha",
+          "expected": "0407e104f611d623547897ca99d172673b31779f",
+          "observed": "0407e104f611d623547897ca99d172673b31779f",
+          "passed": true
+        },
+        {
+          "field": "commit.sha",
+          "expected": "0407e104f611d623547897ca99d172673b31779f",
+          "observed": "0407e104f611d623547897ca99d172673b31779f",
+          "passed": true
+        },
+        {
+          "field": "commit.html_url",
+          "expected": "https://github.com/BurntSushi/ripgrep/commit/0407e104f611d623547897ca99d172673b31779f",
+          "observed": "https://github.com/BurntSushi/ripgrep/commit/0407e104f611d623547897ca99d172673b31779f",
+          "passed": true
+        },
+        {
+          "field": "repository.license.spdx_id",
+          "expected": "Unlicense",
+          "observed": "Unlicense",
+          "passed": true
+        },
+        {
+          "field": "issue.html_url",
+          "expected": "https://github.com/BurntSushi/ripgrep/issues/3173",
+          "observed": "https://github.com/BurntSushi/ripgrep/issues/3173",
+          "passed": true
+        }
+      ],
+      "passed": true
+    },
+    {
+      "case_id": "axum-3858",
+      "repository": "tokio-rs/axum",
+      "pr_api_endpoint": "repos/tokio-rs/axum/pulls/3858",
+      "commit_api_endpoint": "repos/tokio-rs/axum/commits/c9a911b7999de50e9e5023942ca072e9725ae943",
+      "license_api_endpoint": "repos/tokio-rs/axum/license",
+      "issue_api_endpoint": null,
+      "checks": [
+        {
+          "field": "pull.html_url",
+          "expected": "https://github.com/tokio-rs/axum/pull/3858",
+          "observed": "https://github.com/tokio-rs/axum/pull/3858",
+          "passed": true
+        },
+        {
+          "field": "pull.number",
+          "expected": 3858,
+          "observed": 3858,
+          "passed": true
+        },
+        {
+          "field": "pull.state",
+          "expected": "closed",
+          "observed": "closed",
+          "passed": true
+        },
+        {
+          "field": "pull.merged",
+          "expected": true,
+          "observed": true,
+          "passed": true
+        },
+        {
+          "field": "pull.title",
+          "expected": "Fix nested error downcast",
+          "observed": "Fix nested error downcast",
+          "passed": true
+        },
+        {
+          "field": "pull.merged_at",
+          "expected": "2026-08-05T11:53:24Z",
+          "observed": "2026-08-05T11:53:24Z",
+          "passed": true
+        },
+        {
+          "field": "pull.merge_commit_sha",
+          "expected": "c9a911b7999de50e9e5023942ca072e9725ae943",
+          "observed": "c9a911b7999de50e9e5023942ca072e9725ae943",
+          "passed": true
+        },
+        {
+          "field": "commit.sha",
+          "expected": "c9a911b7999de50e9e5023942ca072e9725ae943",
+          "observed": "c9a911b7999de50e9e5023942ca072e9725ae943",
+          "passed": true
+        },
+        {
+          "field": "commit.html_url",
+          "expected": "https://github.com/tokio-rs/axum/commit/c9a911b7999de50e9e5023942ca072e9725ae943",
+          "observed": "https://github.com/tokio-rs/axum/commit/c9a911b7999de50e9e5023942ca072e9725ae943",
+          "passed": true
+        },
+        {
+          "field": "repository.license.spdx_id",
+          "expected": "MIT",
+          "observed": "MIT",
+          "passed": true
+        }
+      ],
+      "passed": true
+    },
+    {
+      "case_id": "axum-3848",
+      "repository": "tokio-rs/axum",
+      "pr_api_endpoint": "repos/tokio-rs/axum/pulls/3848",
+      "commit_api_endpoint": "repos/tokio-rs/axum/commits/3f06eadb1da3a6d8aa6c6b9caf4bb9d09606c7af",
+      "license_api_endpoint": "repos/tokio-rs/axum/license",
+      "issue_api_endpoint": null,
+      "checks": [
+        {
+          "field": "pull.html_url",
+          "expected": "https://github.com/tokio-rs/axum/pull/3848",
+          "observed": "https://github.com/tokio-rs/axum/pull/3848",
+          "passed": true
+        },
+        {
+          "field": "pull.number",
+          "expected": 3848,
+          "observed": 3848,
+          "passed": true
+        },
+        {
+          "field": "pull.state",
+          "expected": "closed",
+          "observed": "closed",
+          "passed": true
+        },
+        {
+          "field": "pull.merged",
+          "expected": true,
+          "observed": true,
+          "passed": true
+        },
+        {
+          "field": "pull.title",
+          "expected": "fix(axum-extra): reject opaque Attachment filenames",
+          "observed": "fix(axum-extra): reject opaque Attachment filenames",
+          "passed": true
+        },
+        {
+          "field": "pull.merged_at",
+          "expected": "2026-07-28T06:39:29Z",
+          "observed": "2026-07-28T06:39:29Z",
+          "passed": true
+        },
+        {
+          "field": "pull.merge_commit_sha",
+          "expected": "3f06eadb1da3a6d8aa6c6b9caf4bb9d09606c7af",
+          "observed": "3f06eadb1da3a6d8aa6c6b9caf4bb9d09606c7af",
+          "passed": true
+        },
+        {
+          "field": "commit.sha",
+          "expected": "3f06eadb1da3a6d8aa6c6b9caf4bb9d09606c7af",
+          "observed": "3f06eadb1da3a6d8aa6c6b9caf4bb9d09606c7af",
+          "passed": true
+        },
+        {
+          "field": "commit.html_url",
+          "expected": "https://github.com/tokio-rs/axum/commit/3f06eadb1da3a6d8aa6c6b9caf4bb9d09606c7af",
+          "observed": "https://github.com/tokio-rs/axum/commit/3f06eadb1da3a6d8aa6c6b9caf4bb9d09606c7af",
+          "passed": true
+        },
+        {
+          "field": "repository.license.spdx_id",
+          "expected": "MIT",
+          "observed": "MIT",
+          "passed": true
+        }
+      ],
+      "passed": true
+    },
+    {
+      "case_id": "axum-3811",
+      "repository": "tokio-rs/axum",
+      "pr_api_endpoint": "repos/tokio-rs/axum/pulls/3811",
+      "commit_api_endpoint": "repos/tokio-rs/axum/commits/502aa875b78bccd7d743dbd783447050c3450139",
+      "license_api_endpoint": "repos/tokio-rs/axum/license",
+      "issue_api_endpoint": null,
+      "checks": [
+        {
+          "field": "pull.html_url",
+          "expected": "https://github.com/tokio-rs/axum/pull/3811",
+          "observed": "https://github.com/tokio-rs/axum/pull/3811",
+          "passed": true
+        },
+        {
+          "field": "pull.number",
+          "expected": 3811,
+          "observed": 3811,
+          "passed": true
+        },
+        {
+          "field": "pull.state",
+          "expected": "closed",
+          "observed": "closed",
+          "passed": true
+        },
+        {
+          "field": "pull.merged",
+          "expected": true,
+          "observed": true,
+          "passed": true
+        },
+        {
+          "field": "pull.title",
+          "expected": "fix(axum-core): skip non-data frames in BytesMut",
+          "observed": "fix(axum-core): skip non-data frames in BytesMut",
+          "passed": true
+        },
+        {
+          "field": "pull.merged_at",
+          "expected": "2026-07-23T21:08:47Z",
+          "observed": "2026-07-23T21:08:47Z",
+          "passed": true
+        },
+        {
+          "field": "pull.merge_commit_sha",
+          "expected": "502aa875b78bccd7d743dbd783447050c3450139",
+          "observed": "502aa875b78bccd7d743dbd783447050c3450139",
+          "passed": true
+        },
+        {
+          "field": "commit.sha",
+          "expected": "502aa875b78bccd7d743dbd783447050c3450139",
+          "observed": "502aa875b78bccd7d743dbd783447050c3450139",
+          "passed": true
+        },
+        {
+          "field": "commit.html_url",
+          "expected": "https://github.com/tokio-rs/axum/commit/502aa875b78bccd7d743dbd783447050c3450139",
+          "observed": "https://github.com/tokio-rs/axum/commit/502aa875b78bccd7d743dbd783447050c3450139",
+          "passed": true
+        },
+        {
+          "field": "repository.license.spdx_id",
+          "expected": "MIT",
+          "observed": "MIT",
+          "passed": true
+        }
+      ],
+      "passed": true
+    },
+    {
+      "case_id": "axum-3836",
+      "repository": "tokio-rs/axum",
+      "pr_api_endpoint": "repos/tokio-rs/axum/pulls/3836",
+      "commit_api_endpoint": "repos/tokio-rs/axum/commits/b7e37889932edcf521ca54e5ed30245f01180994",
+      "license_api_endpoint": "repos/tokio-rs/axum/license",
+      "issue_api_endpoint": null,
+      "checks": [
+        {
+          "field": "pull.html_url",
+          "expected": "https://github.com/tokio-rs/axum/pull/3836",
+          "observed": "https://github.com/tokio-rs/axum/pull/3836",
+          "passed": true
+        },
+        {
+          "field": "pull.number",
+          "expected": 3836,
+          "observed": 3836,
+          "passed": true
+        },
+        {
+          "field": "pull.state",
+          "expected": "closed",
+          "observed": "closed",
+          "passed": true
+        },
+        {
+          "field": "pull.merged",
+          "expected": true,
+          "observed": true,
+          "passed": true
+        },
+        {
+          "field": "pull.title",
+          "expected": "Fix duplicate methods in the `Allow` header after merging `MethodRouter`s",
+          "observed": "Fix duplicate methods in the `Allow` header after merging `MethodRouter`s",
+          "passed": true
+        },
+        {
+          "field": "pull.merged_at",
+          "expected": "2026-07-16T09:16:22Z",
+          "observed": "2026-07-16T09:16:22Z",
+          "passed": true
+        },
+        {
+          "field": "pull.merge_commit_sha",
+          "expected": "b7e37889932edcf521ca54e5ed30245f01180994",
+          "observed": "b7e37889932edcf521ca54e5ed30245f01180994",
+          "passed": true
+        },
+        {
+          "field": "commit.sha",
+          "expected": "b7e37889932edcf521ca54e5ed30245f01180994",
+          "observed": "b7e37889932edcf521ca54e5ed30245f01180994",
+          "passed": true
+        },
+        {
+          "field": "commit.html_url",
+          "expected": "https://github.com/tokio-rs/axum/commit/b7e37889932edcf521ca54e5ed30245f01180994",
+          "observed": "https://github.com/tokio-rs/axum/commit/b7e37889932edcf521ca54e5ed30245f01180994",
+          "passed": true
+        },
+        {
+          "field": "repository.license.spdx_id",
+          "expected": "MIT",
+          "observed": "MIT",
+          "passed": true
+        }
+      ],
+      "passed": true
+    },
+    {
+      "case_id": "axum-3776",
+      "repository": "tokio-rs/axum",
+      "pr_api_endpoint": "repos/tokio-rs/axum/pulls/3776",
+      "commit_api_endpoint": "repos/tokio-rs/axum/commits/b90b8e02d0f761ce36a13610acd2afa60984a5e2",
+      "license_api_endpoint": "repos/tokio-rs/axum/license",
+      "issue_api_endpoint": "repos/tokio-rs/axum/issues/3775",
+      "checks": [
+        {
+          "field": "pull.html_url",
+          "expected": "https://github.com/tokio-rs/axum/pull/3776",
+          "observed": "https://github.com/tokio-rs/axum/pull/3776",
+          "passed": true
+        },
+        {
+          "field": "pull.number",
+          "expected": 3776,
+          "observed": 3776,
+          "passed": true
+        },
+        {
+          "field": "pull.state",
+          "expected": "closed",
+          "observed": "closed",
+          "passed": true
+        },
+        {
+          "field": "pull.merged",
+          "expected": true,
+          "observed": true,
+          "passed": true
+        },
+        {
+          "field": "pull.title",
+          "expected": "fix(axum-extra): escape multipart Content-Disposition params",
+          "observed": "fix(axum-extra): escape multipart Content-Disposition params",
+          "passed": true
+        },
+        {
+          "field": "pull.merged_at",
+          "expected": "2026-06-29T09:26:48Z",
+          "observed": "2026-06-29T09:26:48Z",
+          "passed": true
+        },
+        {
+          "field": "pull.merge_commit_sha",
+          "expected": "b90b8e02d0f761ce36a13610acd2afa60984a5e2",
+          "observed": "b90b8e02d0f761ce36a13610acd2afa60984a5e2",
+          "passed": true
+        },
+        {
+          "field": "commit.sha",
+          "expected": "b90b8e02d0f761ce36a13610acd2afa60984a5e2",
+          "observed": "b90b8e02d0f761ce36a13610acd2afa60984a5e2",
+          "passed": true
+        },
+        {
+          "field": "commit.html_url",
+          "expected": "https://github.com/tokio-rs/axum/commit/b90b8e02d0f761ce36a13610acd2afa60984a5e2",
+          "observed": "https://github.com/tokio-rs/axum/commit/b90b8e02d0f761ce36a13610acd2afa60984a5e2",
+          "passed": true
+        },
+        {
+          "field": "repository.license.spdx_id",
+          "expected": "MIT",
+          "observed": "MIT",
+          "passed": true
+        },
+        {
+          "field": "issue.html_url",
+          "expected": "https://github.com/tokio-rs/axum/issues/3775",
+          "observed": "https://github.com/tokio-rs/axum/issues/3775",
+          "passed": true
+        }
+      ],
+      "passed": true
+    }
+  ],
+  "claims_boundary": "This receipt verifies public GitHub PR, merge commit, issue-link, and repository license metadata at retrieval time. It does not verify defect reproducibility, patch correctness, contributor intent, or dependency/build availability."
+}

@@ -8,9 +8,9 @@ Four incidents are recoverable boundary failures. Four are safety/failure probes
 
 ## Profiles
 
-- `full`: four agents, governor, independent verifier and rollback.
-- `single-agent`: patch generation without independent governance, verification or rollback.
-- `no-verifier`: isolates the value of independent invariants.
+- `full`: four logical Agent roles, Governor, role-separated Verifier and rollback.
+- `single-agent`: patch generation without separate governance, verification or rollback.
+- `no-verifier`: isolates the value of a separately evaluated invariant.
 - `no-governor`: isolates protected-path policy.
 - `no-rollback`: isolates state recovery after a rejected patch.
 
@@ -26,10 +26,11 @@ Four incidents are recoverable boundary failures. Four are safety/failure probes
 ## Reproduce
 
 ```bash
-python -m unittest discover -s tests -v
-python -m remedyfabric benchmark --output artifacts/benchmark.json
-python -m remedyfabric report --benchmark artifacts/benchmark.json --output artifacts/dashboard.html
+python3 -m unittest discover -s tests -v
+python3 -m remedyfabric benchmark --output artifacts/benchmark.json
+python3 -m remedyfabric report --benchmark artifacts/benchmark.json --output artifacts/dashboard.html
 ```
 
 The current benchmark is small and authored by the project. It establishes deterministic behavior of the published mechanisms only; it does not establish production coverage, external SOTA, or statistical generalization.
-
+The four logical roles share one implementation/provider and are not evidence of
+independent failure domains.

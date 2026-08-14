@@ -1,0 +1,102 @@
+{
+  "schema_version": "1.0",
+  "executed": true,
+  "security_controls": {
+    "network_none": true,
+    "rootfs_read_only": true,
+    "workspace_read_only": true,
+    "capabilities_dropped": true,
+    "no_new_privileges": true,
+    "resource_limits": true,
+    "host_secret_environment_scrubbed": true
+  },
+  "expected_flags": {
+    "network_none": [
+      "--network",
+      "none"
+    ],
+    "rootfs_read_only": [
+      "--read-only"
+    ],
+    "workspace_read_only": [
+      "RUN chmod -R a-w /workspace"
+    ],
+    "capabilities_dropped": [
+      "--cap-drop",
+      "ALL"
+    ],
+    "no_new_privileges": [
+      "--security-opt",
+      "no-new-privileges:true"
+    ],
+    "resource_limits": [
+      "--pids-limit",
+      "64",
+      "--memory",
+      "256m",
+      "--cpus",
+      "0.50"
+    ],
+    "host_secret_environment_scrubbed": [
+      "PYTHONPATH=/workspace",
+      "PYTHONDONTWRITEBYTECODE=1"
+    ]
+  },
+  "base_image": {
+    "reference": "python:3.12-slim",
+    "repo_digests": [
+      "python@sha256:229a2c5bfa27522db7815ea81f9bed70af17ccb9de9fc7ad142b1877b5830d36"
+    ],
+    "image_id": "sha256:229a2c5bfa27522db7815ea81f9bed70af17ccb9de9fc7ad142b1877b5830d36"
+  },
+  "result": {
+    "command": [
+      "docker",
+      "run",
+      "--rm",
+      "--network",
+      "none",
+      "--read-only",
+      "--cap-drop",
+      "ALL",
+      "--security-opt",
+      "no-new-privileges:true",
+      "--pids-limit",
+      "64",
+      "--memory",
+      "256m",
+      "--cpus",
+      "0.50",
+      "--tmpfs",
+      "/tmp:rw,noexec,nosuid,nodev,size=64m",
+      "--workdir",
+      "/workspace",
+      "--env",
+      "PYTHONPATH=/workspace",
+      "--env",
+      "PYTHONDONTWRITEBYTECODE=1",
+      "remedyfabric-verifier:a83150377eece4cf",
+      "python",
+      "-m",
+      "unittest",
+      "discover",
+      "-s",
+      "tests",
+      "-v"
+    ],
+    "returncode": 0,
+    "stdout": "",
+    "stderr": "test_env (test_boundaries.Boundaries.test_env) ... ok\ntest_network (test_boundaries.Boundaries.test_network) ... /usr/local/lib/python3.12/unittest/case.py:589: ResourceWarning: unclosed <socket.socket fd=3, family=2, type=1, proto=0, laddr=('0.0.0.0', 0)>\n  if method() is not None:\nResourceWarning: Enable tracemalloc to get the object allocation traceback\nok\ntest_rootfs (test_boundaries.Boundaries.test_rootfs) ... ok\n\n----------------------------------------------------------------------\nRan 3 tests in 0.138s\n\nOK\n",
+    "duration_ms": 2870.512042001792,
+    "timed_out": false
+  },
+  "result_stdout_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+  "result_stderr_sha256": "6f342dea077be4f8486e70b3276127d033e3ae71670702cd2badaf81bf66074e",
+  "expected_tests": [
+    "test_env",
+    "test_network",
+    "test_rootfs"
+  ],
+  "passed": true,
+  "claim_boundary": "One local Docker execution; not proof of production isolation."
+}

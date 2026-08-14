@@ -24,14 +24,21 @@ submission:
   internal_freeze: "2026-08-15T23:59:00+08:00"
   initial_materials: "project description <=500 Chinese characters, solution PPT/PDF, optional code/demo"
   semifinal_materials: "executable AgentTeams package, runnable demo/video, logs/traces/metrics, evaluation, safety and rollback evidence"
+  post_head_authority: "clean-replay.json must originate from the exact frozen-HEAD public CI artifact; clean-replay.json, public-ci.json, champion-evidence.json, and champion-gate.json are authoritative only inside the public v0.2.0 release ZIP after strict validation; they are intentionally not source-HEAD evidence, and any missing carrier or receipt means pending"
 constraints:
-  external_data: "allowed with disclosure and rights; this baseline uses none"
-  external_models: "allowed with disclosure; this baseline uses no model/API"
-  internet: "not required for local evaluation"
-  compute: "CPU-only; Python standard library"
-  environment: "Python 3.11+ on Linux/macOS/Windows"
+  deterministic_core:
+    external_data: "none; authored fixtures only"
+    external_models: "none"
+    internet: "not required"
+    compute: "CPU-only; Python standard library"
+    environment: "Python 3.11+; current mechanism verified on local macOS; the frozen-HEAD v0.2.0 clean replay will record the actual Linux container architecture (public GitHub-hosted CI is expected to be amd64, not assumed arm64) and remains pending until its exact public CI artifact and release-ZIP copy validate"
+  complete_evidence_stack:
+    public_data: "30 public GitHub PR/commit/license metadata comparisons, disclosed and minimized"
+    model: "no model in deterministic core; the conditional official-live path uses local Ollama gpt-oss:20b digest 17052f91a42e97930aa6e28a6c6c06a983e6a58dbb00434885a0cf5313e376f7 (20.9B, MXFP4, Apache-2.0), USD 0 API/model cost and local compute; it counts only if the exact strict receipt validates, and LLM-autonomous orchestration is not claimed"
+    tools: "AgentTeams, Docker, Node.js, Rust, PDF/video renderers, GitHub Actions"
+    internet: "required for public provenance refresh, official live setup, CI, publication, and submission"
+    environment: "macOS host; the frozen-HEAD v0.2.0 post-HEAD receipt records the actual Linux container architecture and remains pending until its public CI artifact and release-ZIP copy validate; Windows and unrecorded architectures are unverified and not claimed supported"
 strategy:
   target: "Agent Infra champion and overall grand prize"
-  current: "verified repository recovery with independent policy, invariants, rollback, and receipts"
+  current: "22-trial bounded repository recovery with 3 Workers, 2 Verifiers, role-separated policy, invariant checks, authorization-before-write, byte recovery, and receipts; 13 enumerated overflow/control trials fail closed; finite checker covers 20,748 decisions; AgentFaultBench has 23 one-Worker plus 7 overflow/control cases; logical roles share one implementation/provider"
   no_secondary_track_until: "main Agent Infra submission is complete and independently reusable"
-

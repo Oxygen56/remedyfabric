@@ -1,0 +1,14 @@
+{
+  "name": "remedyfabric-evidence-dashboard",
+  "version": "0.2.0",
+  "private": true,
+  "engines": { "node": ">=22.13.0" },
+  "scripts": {
+    "build": "node scripts/build.mjs",
+    "test": "npm run build && node --test tests/rendered-html.test.mjs",
+    "lint": "node scripts/lint.mjs"
+  },
+  "dependencies": {},
+  "devDependencies": {},
+  "type": "module"
+}

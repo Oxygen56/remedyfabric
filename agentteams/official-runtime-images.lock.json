@@ -1,0 +1,25 @@
+{
+  "schema_version": "remedyfabric.agentteams-images.v1",
+  "upstream_repository": "https://github.com/agentscope-ai/AgentTeams",
+  "upstream_tag": "v1.2.2",
+  "upstream_commit": "849182af8e017168a5a200a87b1062142caf462d",
+  "registry_signature_verified": false,
+  "claim_boundary": "Registry content digests pin observed bytes; they are not a signature or independent supply-chain attestation.",
+  "images": {
+    "controller": {
+      "reference": "higress-registry.cn-hangzhou.cr.aliyuncs.com/agentteams/agentteams-embedded:v1.2.2",
+      "repo_digest": "higress-registry.cn-hangzhou.cr.aliyuncs.com/agentteams/agentteams-embedded@sha256:c7e467bfa5a2a733ea021c19f223180eef85e3e534873feceb8a7a132253125f",
+      "image_id": "sha256:c7e467bfa5a2a733ea021c19f223180eef85e3e534873feceb8a7a132253125f"
+    },
+    "manager": {
+      "reference": "higress-registry.cn-hangzhou.cr.aliyuncs.com/agentteams/agentteams-manager-copaw:v1.2.2",
+      "repo_digest": "higress-registry.cn-hangzhou.cr.aliyuncs.com/agentteams/agentteams-manager-copaw@sha256:ebf80c4b8296b11ac1bc295329740542fb4c9c0365273019ad70062138477518",
+      "image_id": "sha256:ebf80c4b8296b11ac1bc295329740542fb4c9c0365273019ad70062138477518"
+    },
+    "worker": {
+      "reference": "higress-registry.cn-hangzhou.cr.aliyuncs.com/agentteams/agentteams-qwenpaw-worker:v1.2.2",
+      "repo_digest": "higress-registry.cn-hangzhou.cr.aliyuncs.com/agentteams/agentteams-qwenpaw-worker@sha256:5a8c60926009551f7ce555f657d63c8791450196a79ab41ba8bafd2e1bd51834",
+      "image_id": "sha256:5a8c60926009551f7ce555f657d63c8791450196a79ab41ba8bafd2e1bd51834"
+    }
+  }
+}

@@ -1,0 +1,36 @@
+{
+  "schema_version": 1,
+  "publisher": "Alibaba Cloud",
+  "portal": "https://skills.aliyun.com",
+  "official_documentation": "https://help.aliyun.com/zh/skillsportal/quickly-use-alibaba-cloud-skills",
+  "repository": "https://github.com/aliyun/alibabacloud-aiops-skills",
+  "commit": "11c388200696beba342009e9c87bfeae38cd5c63",
+  "skill": {
+    "name": "alibabacloud-resourcecenter-search",
+    "path": "skills/migrationom/entconsole/alibabacloud-resourcecenter-search",
+    "description": "Global Alibaba Cloud resource inventory, search, and statistics.",
+    "aggregate_sha256": "770cb6c943271ba137b8942c493c087bb2af250bfb3b4c98a2dab417497b5f2d",
+    "files": {
+      "SKILL.md": "6f6290be0a9f0c6ad93a3a1e3a8be5bee5eee07ce3f13c89a89f2a7b6258eddd",
+      "references/acceptance-criteria.md": "7620dac51436387d516e376cae61ecf4678dddec5724703e9f7215f3b0999904",
+      "references/cli-installation-guide.md": "93abdd4f4a067822cca6894aa890855a50e723a6f6243f208887f171d6635170",
+      "references/error-codes.md": "041376693feaf36f1ca18c31d64c718734b66c1550cdcc82ca9e67de0800859b",
+      "references/ram-policies.md": "84facc0bd85656e8862d93383a359c27255be972f4bd1323f39500f6d8221e3a",
+      "references/related-apis.md": "f33c2e947b0346c250ca46ab93c282ca5f973cfbd194a87ea9a345331c7962fe",
+      "references/verification-method.md": "f2b2d03a26d322f059c45f055eefe8cdc0bb64e5724561d33657f30a21ff6add",
+      "scripts/query-resource-types.py": "2f4ee2deb67e886ad6d0c1ac984dd5e5a96d116fecfc4d851fcb580b89cf448b"
+    }
+  },
+  "provenance_verified": true,
+  "redistribution": {
+    "vendored": false,
+    "reason": "No repository-level LICENSE or NOTICE file was present at the pinned commit; RemedyFabric records hashes and fetches the public upstream package at runtime instead of redistributing its content."
+  },
+  "runtime_boundary": {
+    "package_install_requires_cloud_credentials": false,
+    "cloud_api_use_requires_alibaba_cloud_account": true,
+    "cloud_api_use_requires_aliyun_cli_3_3_3_or_newer": true,
+    "cloud_api_invoked_in_remedyfabric_evidence_run": false,
+    "billing": "The Skills Portal is free; any cloud resources used through a Skill follow the applicable Alibaba Cloud billing rules."
+  }
+}

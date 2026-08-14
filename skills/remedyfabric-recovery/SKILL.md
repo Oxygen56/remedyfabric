@@ -25,7 +25,7 @@ An isolated source workspace has a reproducible failing test or health check and
 
 Return exactly one `PatchCandidate` containing:
 
-- `skill_name` and version;
+- immutable `skill_name`, `skill_version`, `provider_name`, and `provider_version`;
 - diagnosis;
 - confidence in `[0,1]`;
 - zero or more `FileEdit` values with relative path, complete old content, complete new content, and reason;
@@ -51,5 +51,4 @@ The Skill must never apply its own output. The Governor evaluates it, the Manage
 
 ## Reuse
 
-The deterministic implementation is `RuleBasedRecoverySkill`. A model-backed Worker can implement the same output contract. Governance, verification, rollback and ledger code are intentionally provider-independent.
-
+The deterministic implementation is `RuleBasedRecoverySkill`. A model-backed Worker can implement the same output contract. Skill and provider versions are bound into the candidate digest so a replay cannot silently substitute a different producer contract. Governance, verification, rollback and ledger code are intentionally provider-independent.

@@ -11,6 +11,7 @@ from .ledger import verify_ledger
 from .models import Incident
 from .orchestrator import RecoveryFabric
 from .report import render_dashboard
+from .resilient import run_resilient_matrix
 
 
 def command_demo(args: argparse.Namespace) -> int:
@@ -72,6 +73,26 @@ def command_report(args: argparse.Namespace) -> int:
     return 0
 
 
+def command_resilient(args: argparse.Namespace) -> int:
+    """Run the published faulty-Worker matrix and persist its raw receipt."""
+
+    output = Path(args.output).resolve()
+    matrix = run_resilient_matrix()
+    matrix.write(output)
+    print(
+        json.dumps(
+            {
+                "passed": matrix.passed,
+                "metrics": matrix.payload["metrics"],
+                "evidence_digest": matrix.payload["matrix_evidence_digest"],
+                "output": str(output),
+            },
+            indent=2,
+        )
+    )
+    return 0 if matrix.passed else 1
+
+
 def build_parser() -> argparse.ArgumentParser:
     parser = argparse.ArgumentParser(prog="remedyfabric")
     sub = parser.add_subparsers(dest="command", required=True)
@@ -97,6 +118,12 @@ def build_parser() -> argparse.ArgumentParser:
     report.add_argument("--benchmark", default="artifacts/benchmark.json")
     report.add_argument("--output", default="artifacts/dashboard.html")
     report.set_defaults(func=command_report)
+    resilient = sub.add_parser(
+        "resilient",
+        help="run the bounded faulty-Worker recovery and rollback matrix",
+    )
+    resilient.add_argument("--output", default="artifacts/resilient-matrix.json")
+    resilient.set_defaults(func=command_resilient)
     return parser
 
 

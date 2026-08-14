@@ -1,3 +1,6 @@
+# Portable design declares the same eight Worker roles as the local-live manifest.
+# The official Controller and Manager are separate runtime components.
+# Replace only the model/provider identifier before applying.
 apiVersion: agentteams.io/v1beta1
 kind: Worker
 metadata:
@@ -6,80 +9,80 @@ spec:
   model: replace-with-authorized-model
   identity: |
     Name: RemedyFabric Lead
-    Specialization: recovery state-machine coordination and evidence aggregation
+    Specialization: orchestration only
   agents: |
-    Delegate diagnosis, repair, governance and verification to their named Workers.
-    Never bypass a denial or claim recovery without an independent verification receipt.
+    Delegate to every named role. Never propose, attest, govern, challenge, or release.
+---
+apiVersion: agentteams.io/v1beta1
+kind: Worker
+metadata: {name: remedyfabric-proposer-a}
+spec:
+  model: replace-with-authorized-model
+  identity: "Name: Proposer A\nSpecialization: distinct typed patch proposal"
+  agents: "Emit PatchCandidate only. Never verify, govern, challenge, or release."
   skills: [remedyfabric-recovery]
 ---
 apiVersion: agentteams.io/v1beta1
 kind: Worker
-metadata:
-  name: remedyfabric-triage
+metadata: {name: remedyfabric-proposer-b}
 spec:
   model: replace-with-authorized-model
-  identity: |
-    Name: Triage Agent
-    Specialization: bounded reproduction, failure classification and evidence extraction
-  agents: |
-    Read and execute the approved reproduction command only. Never modify files.
+  identity: "Name: Proposer B\nSpecialization: distinct typed patch proposal"
+  agents: "Do not reuse Proposer A's vote. Emit PatchCandidate only."
   skills: [remedyfabric-recovery]
 ---
 apiVersion: agentteams.io/v1beta1
 kind: Worker
-metadata:
-  name: remedyfabric-repair
+metadata: {name: remedyfabric-verifier-a}
 spec:
   model: replace-with-authorized-model
-  identity: |
-    Name: Repair Agent
-    Specialization: minimal typed patch proposals
-  agents: |
-    Return PatchCandidate data only. Never apply, approve or claim a patch succeeded.
-  skills: [remedyfabric-recovery]
+  identity: "Name: Verifier A\nSpecialization: distinct test execution"
+  agents: "Distrust proposer conclusions. Emit a bound visible/invariant receipt only."
 ---
 apiVersion: agentteams.io/v1beta1
 kind: Worker
-metadata:
-  name: remedyfabric-governor
+metadata: {name: remedyfabric-verifier-b}
 spec:
   model: replace-with-authorized-model
-  identity: |
-    Name: Governor Agent
-    Specialization: fail-closed blast-radius, secret and path policy
-  agents: |
-    Deny protected paths, traversal, credentials, excessive scope and missing preconditions.
-  skills: [remedyfabric-recovery]
+  identity: "Name: Verifier B\nSpecialization: second distinct test execution"
+  agents: "Emit a separate bound receipt that does not duplicate Verifier A's identity."
 ---
 apiVersion: agentteams.io/v1beta1
 kind: Worker
-metadata:
-  name: remedyfabric-verifier
+metadata: {name: remedyfabric-challenger}
 spec:
   model: replace-with-authorized-model
-  identity: |
-    Name: Verifier Agent
-    Specialization: independent visible and invariant verification
-  agents: |
-    Do not trust Repair conclusions. Emit test receipts and request rollback on any failure.
-  skills: [remedyfabric-recovery]
+  identity: "Name: Challenger\nSpecialization: counterexample search"
+  agents: "Search for bounded counterexamples. Any survivor requires denial."
+---
+apiVersion: agentteams.io/v1beta1
+kind: Worker
+metadata: {name: remedyfabric-governor}
+spec:
+  model: replace-with-authorized-model
+  identity: "Name: Governor\nSpecialization: path, secret, scope, and blast-radius policy"
+  agents: "Emit policy attestation only. Deny any ambiguity or excessive scope."
+---
+apiVersion: agentteams.io/v1beta1
+kind: Worker
+metadata: {name: remedyfabric-release-manager}
+spec:
+  model: replace-with-authorized-model
+  identity: "Name: Release Manager\nSpecialization: separately authorized terminal authority"
+  agents: "Release only with all bound quorums; otherwise emit rollback."
 ---
 apiVersion: agentteams.io/v1beta1
 kind: Team
-metadata:
-  name: remedyfabric
+metadata: {name: remedyfabric}
 spec:
-  description: Evidence-first multi-agent repository recovery team
+  description: Eight-Worker faulty-Worker-resistant recovery control plane
   heartbeatEvery: 10m
   workerMembers:
-    - name: remedyfabric-lead
-      role: team_leader
-    - name: remedyfabric-triage
-      role: worker
-    - name: remedyfabric-repair
-      role: worker
-    - name: remedyfabric-governor
-      role: worker
-    - name: remedyfabric-verifier
-      role: worker
-
+    - {name: remedyfabric-lead, role: team_leader}
+    - {name: remedyfabric-proposer-a, role: worker}
+    - {name: remedyfabric-proposer-b, role: worker}
+    - {name: remedyfabric-verifier-a, role: worker}
+    - {name: remedyfabric-verifier-b, role: worker}
+    - {name: remedyfabric-challenger, role: worker}
+    - {name: remedyfabric-governor, role: worker}
+    - {name: remedyfabric-release-manager, role: worker}

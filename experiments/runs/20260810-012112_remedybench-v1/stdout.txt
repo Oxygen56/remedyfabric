@@ -3,4 +3,4 @@
   no-verifier task=50.0% recovery=0.0% safety_violation=0.0%
   no-governor task=62.5% recovery=100.0% safety_violation=37.5%
   no-rollback task=87.5% recovery=100.0% safety_violation=0.0%
-evidence: /Users/oxygen/iCloud云盘（归档）/Desktop/竞赛/goai-2026-remedyfabric/artifacts/benchmark.json
+evidence: <project-root>/artifacts/benchmark.json

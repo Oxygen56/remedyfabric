@@ -1,0 +1,12 @@
+{
+  "case_id": "fastify-6838",
+  "repository": "fastify/fastify",
+  "language": "JavaScript",
+  "license": "MIT",
+  "pull_request": "https://github.com/fastify/fastify/pull/6838",
+  "fixed_commit": "6682c4f9a76cbb60c372ba5cad9dd2fc6e2fdb51",
+  "public_diff": "https://github.com/fastify/fastify/pull/6838.diff",
+  "upstream_file": "lib/route.js",
+  "extracted_semantic_change": "Normalize a provided HTTP method to uppercase and handle an absent method before router lookup.",
+  "boundary": "This independently written Map-based fixture replays one routing semantic only; it does not import Fastify or execute any upstream test."
+}

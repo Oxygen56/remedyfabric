@@ -1,0 +1,221 @@
+{
+  "schema_version": "remedyfabric.delivery-qa.v2",
+  "verified_at_utc": "2026-08-14T17:18:08.586260Z",
+  "presentation_contract_sha256": "ad18fa45200c466a918d4cf8324492d6334a917b5a5206fe16c037d6527b040f",
+  "caption_contract_sha256": "2a814e8f9dac1c7b2c8c6d239a115cab7dcde5c7c03b06f462493e89355f5257",
+  "evidence_bindings": {
+    "resilient": {
+      "path": "artifacts/resilient-matrix.json",
+      "sha256": "ef68dbe6b374712cb909c58853c246fc9378e1964da2a53fd68654a6183d97ef",
+      "size_bytes": 629817
+    },
+    "model": {
+      "path": "artifacts/quorum-model.json",
+      "sha256": "2c2bc924b702b80280d16664e70c7535f06fd42c64273eaad380ab87ba15ec47",
+      "size_bytes": 1688
+    },
+    "faultbench": {
+      "path": "artifacts/faultbench-results.json",
+      "sha256": "090ae69fc9181738e11f8edf8a27eb931b923e747e01efb9bf629a6e9454f03b",
+      "size_bytes": 123207
+    },
+    "sources": {
+      "path": "artifacts/faultbench-source-verification.json",
+      "sha256": "cf9b120a15b4b92dfcb8c058b8819fcdff64866f95e25f30b8ec55ef227a9042",
+      "size_bytes": 73573
+    },
+    "micro": {
+      "path": "artifacts/faultbench-micro-replays.json",
+      "sha256": "f448590d07fa4077b93825c541470a72e2a3906ffb15e5120f9d3b12b8e1ebd7",
+      "size_bytes": 5027
+    },
+    "isolation": {
+      "path": "artifacts/container-isolation.json",
+      "sha256": "28a7b740fccd53391ffa03ea4fac5e2c310a26ce1f412953b50e05a60b2785a0",
+      "size_bytes": 2880
+    },
+    "agentteams": {
+      "path": "artifacts/agentteams-live-evidence.json",
+      "sha256": "2d6544db48e5a9df66047c9454b3aff3627e94f0c189ba1829d86491837fc9fe",
+      "size_bytes": 383025
+    },
+    "clean": {
+      "path": "artifacts/clean-replay.json",
+      "binding": "strict-semantic-projection-v1",
+      "sha256": "71b433243def216fe7a117ee134b7443d99d569f705129a7615f46250f8d8bc1"
+    }
+  },
+  "passed": true,
+  "checks": {
+    "evidence_bindings": true,
+    "presentation_evidence_complete": true,
+    "reproduction_commands": true,
+    "font_license": true,
+    "pdf_structure": true,
+    "pdf_text_contract": true,
+    "video_structure": true,
+    "video_caption_contract": true,
+    "preview_contact_sheet": true,
+    "dashboard_self_contained": true,
+    "dashboard_text_contract": true,
+    "visual_inspection": true
+  },
+  "fonts": {
+    "paths": {
+      "regular": "assets/fonts/Poppins/Poppins-Regular.ttf",
+      "bold": "assets/fonts/Poppins/Poppins-Bold.ttf",
+      "license": "assets/fonts/Poppins/OFL.txt"
+    },
+    "sha256": {
+      "regular": "7e65201e9b79159e2300267cc885e16c8dcef2424cdfa09a29bfb0980a94a7ba",
+      "bold": "983676516167748b74de6f4771fb384c664fd913acb8b471122ecacf5da5ea6c",
+      "license": "8503c30a4d7e09c4c09015fee42f829f18acbe6330755e9930ba50ea44eaa157"
+    },
+    "license": "SIL Open Font License 1.1",
+    "passed": true
+  },
+  "pdf": {
+    "path": "output/pdf/remedyfabric-goai-agent-infra-champion.pdf",
+    "sha256": "ff06d4e313eb478c3426e3874c83cf5a8988c2fdd69617f551812887ecd67d4d",
+    "size_bytes": 80407,
+    "pages": 9,
+    "page_text_sha256": [
+      "b0da179cf75be8358364f60ecb837cd18c2bab04563c885271972be4747007df",
+      "31b1011dea824b832fe50de6eadf30e3fcbdd1bc663436aec87e4d3ce8bb9aee",
+      "e03047f00e4daa74d08090cec231e7a1702da5026123e9b88d6e4152cb02631b",
+      "e2656a8e7a584dfeaf418edf0e95c3aa2fbaa245d5fa111b1cba3c951169abe0",
+      "12600bb205c800cb46353dbc8ecea6613721ee47c8d1ba79e82dbcf337f21d6a",
+      "dcb9fe330e227d4d47eb4ae11e1bc5258f21a2db1224c7dee7a5685f366cc7a4",
+      "f6351b478285f900bcc9ff7673635185678b875a9c87afde46a650f1f661a894",
+      "8d3888b5970273a5d70410b375f4c5a84ea93704638019d7aa673c6a32b5ac6c",
+      "61270d14ba1805c08e20fa6902bb3123cd5ca9eb7433190b6e8ce5c97592794e"
+    ],
+    "page_required_text_matches": {
+      "1": {
+        "RemedyFabric": true,
+        "No single Worker can authorize release.": true,
+        "EVIDENCE COMPLETE": true
+      },
+      "2": {
+        "A repair Agent can become the incident": true,
+        "WINNING CONTRACT": true
+      },
+      "3": {
+        "3 WORKERS": true,
+        "2 VERIFIERS": true,
+        "RELEASE MANAGER": true
+      },
+      "4": {
+        "22 executable trials": true,
+        "8 executable trials": true,
+        "13 enumerated trials": true,
+        "20,748": true
+      },
+      "5": {
+        "AgentFaultBench-OSS": true,
+        "23 within-boundary cases": true,
+        "7 overflow/control-plane cases": true,
+        "3 independent extracted semantics passed": true
+      },
+      "6": {
+        "Every green claim has a machine-readable receipt": true,
+        "Official AgentTeams": true,
+        "validated live receipt": true
+      },
+      "7": {
+        "25%": true,
+        "20%": true,
+        "5%": true,
+        "Coverage mapping is not a predicted score": true
+      },
+      "8": {
+        "Clone. Run. Inspect the receipts.": true,
+        "python3 -m pip install -e .": true,
+        "remedyfabric resilient --output artifacts/resilient-matrix.json": true,
+        "python3 scripts/run_faultbench.py": true,
+        "python3 scripts/run_faultbench_micro_replays.py": true,
+        "python3 scripts/champion_gate.py": true
+      },
+      "9": {
+        "22 executable fault-matrix trials": true,
+        "SUPPORTED": true,
+        "NOT CLAIMED": true
+      }
+    },
+    "presentation_contract_sha256": "ad18fa45200c466a918d4cf8324492d6334a917b5a5206fe16c037d6527b040f",
+    "structure_passed": true,
+    "text_contract_passed": true,
+    "inspection_error": null,
+    "passed": true
+  },
+  "video": {
+    "path": "artifacts/remedyfabric-champion-demo.mp4",
+    "sha256": "2ab80052a7a241dee2fe32d607e186c06e02310163271b93681cbeb932868e66",
+    "size_bytes": 3934038,
+    "duration_seconds": 49.0,
+    "video_codec": "h264",
+    "pixel_format": "yuv420p",
+    "width": 1920,
+    "height": 1080,
+    "audio_stream_count": 0,
+    "audio_present": false,
+    "subtitle_stream_count": 1,
+    "subtitle_codec": "mov_text",
+    "subtitle_cue_count": 7,
+    "subtitle_payload_sha256": "85697c148b4c3abd6145b44d6d8e6b0e56a485dcd3f191ec5f8e3135ee3a9718",
+    "presentation_contract_sha256": "ad18fa45200c466a918d4cf8324492d6334a917b5a5206fe16c037d6527b040f",
+    "caption_contract_sha256": "2a814e8f9dac1c7b2c8c6d239a115cab7dcde5c7c03b06f462493e89355f5257",
+    "structure_passed": true,
+    "caption_contract_passed": true,
+    "probe_error": null,
+    "subtitle_error": null,
+    "passed": true
+  },
+  "preview": {
+    "path": "artifacts/video-preview.jpg",
+    "sha256": "6c06174936f4c2e5e12be0abf178af9408c9e8cd2ad1f057db5e842bda400081",
+    "size_bytes": 301593,
+    "format": "JPEG",
+    "width": 1920,
+    "height": 1080,
+    "tile_count": 9,
+    "video_scene_tile_count": 7,
+    "source_video_sha256": "2ab80052a7a241dee2fe32d607e186c06e02310163271b93681cbeb932868e66",
+    "caption_contract_sha256": "2a814e8f9dac1c7b2c8c6d239a115cab7dcde5c7c03b06f462493e89355f5257",
+    "metadata_sha256": "4fdf1afccbd9e6c79bb92ddced21a3d71d78f813020f8f955b8736e66ac4bb59",
+    "presentation_contract_sha256": "ad18fa45200c466a918d4cf8324492d6334a917b5a5206fe16c037d6527b040f",
+    "contact_sheet_matches_video": true,
+    "metadata_matches_contract": true,
+    "inspection_error": null,
+    "structure_passed": true,
+    "passed": true
+  },
+  "dashboard": {
+    "path": "artifacts/dashboard.html",
+    "sha256": "62f22da558383880217a564d035c306c24f2a44621605b13034e9840ef60cf6a",
+    "size_bytes": 7692,
+    "utf8": true,
+    "remote_asset_count": 0,
+    "required_text_matches": {
+      "RemedyFabric": true,
+      "Champion thesis": true,
+      "Evidence ledger": true,
+      "AgentFaultBench-OSS boundary": true,
+      "Evidence completeness before repository freeze": true,
+      "Five-minute review path": true,
+      "23 protocol-simulation cases": true,
+      "7 overflow/control-plane cases": true,
+      "python3 -m pip install -e .": true,
+      "remedyfabric resilient --output artifacts/resilient-matrix.json": true,
+      "python3 scripts/run_faultbench.py": true,
+      "python3 scripts/run_faultbench_micro_replays.py": true,
+      "python3 scripts/champion_gate.py": true
+    },
+    "presentation_contract_sha256": "ad18fa45200c466a918d4cf8324492d6334a917b5a5206fe16c037d6527b040f",
+    "structure_passed": true,
+    "text_contract_passed": true,
+    "inspection_error": null,
+    "passed": true
+  },
+  "claim_boundary": "Structural and semantic checks were recomputed from current bytes and evidence. The MP4 has exactly one H.264 video stream, one complete English subtitle stream, and zero audio streams. Visual inspection means every PDF page and every scene midpoint contact-sheet tile was reviewed; it is not proof of playback on every device."
+}

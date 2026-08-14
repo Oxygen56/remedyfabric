@@ -1,0 +1,12 @@
+{
+  "case_id": "requests-7308",
+  "repository": "psf/requests",
+  "language": "Python",
+  "license": "Apache-2.0",
+  "pull_request": "https://github.com/psf/requests/pull/7308",
+  "fixed_commit": "bc7dd0fc4d56e808bcdd85ac2d797b3107c89259",
+  "public_diff": "https://github.com/psf/requests/pull/7308.diff",
+  "upstream_file": "src/requests/_internal_utils.py",
+  "extracted_semantic_change": "Replace Python regex end anchor $ with absolute end anchor \\Z for header validation.",
+  "boundary": "This independently written fixture replays one observable regex semantic only; it does not import Requests or execute any upstream test."
+}

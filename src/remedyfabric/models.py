@@ -22,6 +22,9 @@ class PatchCandidate:
     edits: tuple[FileEdit, ...]
     confidence: float
     estimated_cost_usd: float = 0.0
+    skill_version: str = "0.1.0"
+    provider_name: str = "rule-based"
+    provider_version: str = "1.0.0"
 
 
 @dataclass(frozen=True)

@@ -4,19 +4,208 @@ on:
   pull_request:
 permissions:
   contents: read
+concurrency:
+  group: ci-${{ github.ref }}
+  cancel-in-progress: true
 jobs:
-  test:
+  python:
     runs-on: ubuntu-latest
     strategy:
       matrix:
         python-version: ["3.11", "3.13"]
     steps:
-      - uses: actions/checkout@v4
-      - uses: actions/setup-python@v5
+      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262 # v4
+      - uses: actions/setup-python@a26af69be951a213d495a4c3e4e4022e16d87065 # v5
         with:
           python-version: ${{ matrix.python-version }}
-      - run: python -m pip install -e .
+          cache: pip
+      - run: python -m pip install -e '.[dev]' -r requirements/pdf.txt -r requirements/video.txt
+      - run: python -m pip check
+      - run: ruff check src tests scripts
       - run: python -m unittest discover -s tests -v
       - run: remedyfabric benchmark --output artifacts/benchmark.json
       - run: remedyfabric report --benchmark artifacts/benchmark.json --output artifacts/dashboard.html
+  release-package:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262 # v4
+      - uses: actions/setup-python@a26af69be951a213d495a4c3e4e4022e16d87065 # v5
+        with:
+          python-version: "3.13"
+          cache: pip
+      - run: python -m pip install uv==0.11.26
+      - name: Prime the offline build cache
+        run: >-
+          uv build --clear --no-create-gitignore
+          --out-dir /tmp/remedyfabric-build-cache-prime .
+      - name: Pull the pinned clean-replay base
+        run: docker pull python:3.12-slim
+      - name: Rebuild and replay from the frozen source
+        run: PYTHONPATH=src python scripts/run_clean_replay.py
+      - uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02 # v4
+        with:
+          name: clean-release-${{ github.sha }}
+          path: |
+            dist/remedyfabric-0.2.0-py3-none-any.whl
+            dist/remedyfabric-0.2.0.tar.gz
+            artifacts/clean-replay.json
+          if-no-files-found: error
+          retention-days: 7
+  evidence-site:
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: site
+    steps:
+      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262 # v4
+      - uses: actions/setup-node@49933ea5288caeca8642d1e84afbd3f7d6820020 # v4
+        with:
+          node-version: "22"
+          cache: npm
+          cache-dependency-path: site/package-lock.json
+      - run: npm ci
+      - run: npm audit
+      - run: npm run lint
+      - run: npm run build
+      - run: node --test tests/rendered-html.test.mjs
+  final-evidence:
+    runs-on: ubuntu-latest
+    needs: [python, release-package, evidence-site]
+    env:
+      CLEAN_BASE_IMAGE: python:3.12-slim
+    steps:
+      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262 # v4
+      - uses: actions/setup-python@a26af69be951a213d495a4c3e4e4022e16d87065 # v5
+        with:
+          python-version: "3.13"
+          cache: pip
+      - uses: actions/setup-node@49933ea5288caeca8642d1e84afbd3f7d6820020 # v4
+        with:
+          node-version: "22"
+      - run: python -m pip install -e '.[dev]' -r requirements/pdf.txt -r requirements/video.txt
+      - uses: actions/download-artifact@d3f86a106a0bac45b974a628896c90dbdf5c8093 # v4
+        with:
+          name: clean-release-${{ github.sha }}
+          path: .
+      - name: Re-execute external-runtime and protocol evidence
+        run: |
+          rustc --version
+          docker pull "$CLEAN_BASE_IMAGE"
+          base_id=$(docker image inspect "$CLEAN_BASE_IMAGE" --format '{{.Id}}')
+          base_digests=$(docker image inspect "$CLEAN_BASE_IMAGE" --format '{{json .RepoDigests}}')
+          python - "$base_id" "$base_digests" <<'PY'
+          import json
+          import re
+          import sys
 
+          image_id, raw_digests = sys.argv[1:]
+          digests = json.loads(raw_digests)
+          assert re.fullmatch(r"sha256:[0-9a-f]{64}", image_id)
+          assert len([item for item in digests if item.startswith("python@sha256:")]) == 1
+          PY
+          mkdir -p "$RUNNER_TEMP/remedyfabric-replay"
+          python scripts/run_resilient_matrix.py \
+            --output "$RUNNER_TEMP/remedyfabric-replay/resilient-matrix.json"
+          python scripts/check_quorum_model.py \
+            --output "$RUNNER_TEMP/remedyfabric-replay/quorum-model.json"
+          python scripts/run_faultbench.py \
+            --output "$RUNNER_TEMP/remedyfabric-replay/faultbench-results.json"
+          python scripts/run_faultbench_micro_replays.py \
+            --output "$RUNNER_TEMP/remedyfabric-replay/faultbench-micro-replays.json"
+          python scripts/run_container_isolation.py \
+            --output "$RUNNER_TEMP/remedyfabric-replay/container-isolation.json"
+      - name: Recompute every pre-publication semantic gate
+        env:
+          EXPECTED_HEAD: ${{ github.sha }}
+        run: |
+          python - <<'PY'
+          import json
+          import os
+          import re
+          import subprocess
+          from pathlib import Path
+
+          from remedyfabric.agentteams_evidence import live_evidence_is_valid
+          from remedyfabric.delivery_validation import validate_delivery_receipt
+          from remedyfabric.evidence_validation import validate_core_evidence
+          from remedyfabric.release_integrity import clean_replay_current, project_version
+
+          root = Path.cwd()
+          replay_root = Path(os.environ["RUNNER_TEMP"]) / "remedyfabric-replay"
+          actual_head = subprocess.run(
+              ["git", "rev-parse", "HEAD"],
+              check=True,
+              capture_output=True,
+              text=True,
+          ).stdout.strip()
+
+          def load(relative):
+              return json.loads((root / relative).read_text(encoding="utf-8"))
+
+          frozen_core_failures = validate_core_evidence(
+              root=root,
+              resilient=load("artifacts/resilient-matrix.json"),
+              model=load("artifacts/quorum-model.json"),
+              faultbench=load("artifacts/faultbench-results.json"),
+              sources=load("artifacts/faultbench-source-verification.json"),
+              micro=load("artifacts/faultbench-micro-replays.json"),
+              isolation=load("artifacts/container-isolation.json"),
+          )
+          replay_core_failures = validate_core_evidence(
+              root=root,
+              resilient=json.loads(
+                  (replay_root / "resilient-matrix.json").read_text(encoding="utf-8")
+              ),
+              model=json.loads(
+                  (replay_root / "quorum-model.json").read_text(encoding="utf-8")
+              ),
+              faultbench=json.loads(
+                  (replay_root / "faultbench-results.json").read_text(encoding="utf-8")
+              ),
+              sources=load("artifacts/faultbench-source-verification.json"),
+              micro=json.loads(
+                  (replay_root / "faultbench-micro-replays.json").read_text(encoding="utf-8")
+              ),
+              isolation=json.loads(
+                  (replay_root / "container-isolation.json").read_text(encoding="utf-8")
+              ),
+          )
+          delivery_failures = validate_delivery_receipt(
+              load("artifacts/delivery-qa.json"), root
+          )
+          clean = load("artifacts/clean-replay.json")
+          checks = {
+              "frozen_head": (
+                  actual_head == os.environ["EXPECTED_HEAD"]
+                  and re.fullmatch(r"[0-9a-f]{40}", actual_head) is not None
+              ),
+              "version_0_2_0": project_version(root) == "0.2.0",
+              "frozen_core_semantics": not frozen_core_failures,
+              "replay_core_semantics": not replay_core_failures,
+              "agentteams_strict": live_evidence_is_valid(
+                  load("artifacts/agentteams-live-evidence.json")
+              ),
+              "clean_replay_current": clean_replay_current(clean, root),
+              "delivery_bytes_current": not delivery_failures,
+          }
+          if not all(checks.values()):
+              raise SystemExit(
+                  json.dumps(
+                      {
+                          "checks": checks,
+                          "frozen_core_failures": frozen_core_failures,
+                          "replay_core_failures": replay_core_failures,
+                          "delivery_failures": delivery_failures,
+                      },
+                      sort_keys=True,
+                  )
+              )
+          print(json.dumps({"checks": checks}, sort_keys=True))
+          PY
+      - uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02 # v4
+        with:
+          name: final-evidence-prerequisites-${{ github.sha }}
+          path: |
+            artifacts/clean-replay.json
+          if-no-files-found: error
+          retention-days: 7

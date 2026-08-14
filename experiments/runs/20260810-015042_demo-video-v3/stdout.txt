@@ -1,1 +1,1 @@
-/Users/oxygen/iCloud云盘（归档）/Desktop/竞赛/goai-2026-remedyfabric/artifacts/remedyfabric-demo.mp4
+<project-root>/artifacts/remedyfabric-demo.mp4

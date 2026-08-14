@@ -1,10 +1,12 @@
 #!/usr/bin/env python3
-"""Generate the GOAI submission proposal PDF from verified repository artifacts."""
+"""Generate the GOAI Agent Infra champion proposal from verified JSON artifacts."""
 
 from __future__ import annotations
 
+import argparse
 import json
 from pathlib import Path
+from typing import Any
 
 from reportlab.graphics import renderPDF
 from reportlab.graphics.barcode import qr
@@ -19,14 +21,20 @@ from reportlab.pdfbase.ttfonts import TTFont
 from reportlab.pdfgen import canvas
 from reportlab.platypus import Paragraph
 
+from remedyfabric.delivery_validation import (
+    REPRODUCTION_COMMANDS,
+    build_presentation_contract,
+    require_presentation_render,
+)
+
 ROOT = Path(__file__).resolve().parents[1]
-OUTPUT = ROOT / "output/pdf/remedyfabric-goai-2026-proposal.pdf"
+DEFAULT_OUTPUT = ROOT / "output/pdf/remedyfabric-goai-agent-infra-champion.pdf"
 PAGE = landscape((338.667 * mm, 190.5 * mm))
 W, H = PAGE
 BG, PANEL, WHITE, MUTED = map(HexColor, ("#07111f", "#10213a", "#eef5ff", "#9eb2cf"))
 CYAN, AMBER, RED, LINE = map(HexColor, ("#43d9c4", "#ffc857", "#ff6b7a", "#294766"))
-REGULAR = "/System/Library/Fonts/Supplemental/Arial.ttf"
-BOLD = "/System/Library/Fonts/Supplemental/Arial Bold.ttf"
+REGULAR = str(ROOT / "assets/fonts/Poppins/Poppins-Regular.ttf")
+BOLD = str(ROOT / "assets/fonts/Poppins/Poppins-Bold.ttf")
 
 
 def setup_fonts() -> None:
@@ -34,15 +42,21 @@ def setup_fonts() -> None:
     pdfmetrics.registerFont(TTFont("RF-Bold", BOLD))
 
 
-def box(c: canvas.Canvas, x: float, y: float, w: float, h: float, radius: float = 6 * mm) -> None:
+def box(c: canvas.Canvas, x: float, y: float, w: float, h: float, radius: float = 5 * mm) -> None:
     c.setFillColor(PANEL)
     c.setStrokeColor(LINE)
-    c.setLineWidth(1.2)
+    c.setLineWidth(1.1)
     c.roundRect(x, y, w, h, radius, fill=1, stroke=1)
 
 
 def text(
-    c: canvas.Canvas, value: str, x: float, y: float, size: float, color=WHITE, bold=False
+    c: canvas.Canvas,
+    value: str,
+    x: float,
+    y: float,
+    size: float,
+    color=WHITE,
+    bold: bool = False,
 ) -> None:
     c.setFillColor(color)
     c.setFont("RF-Bold" if bold else "RF-Regular", size)
@@ -56,22 +70,22 @@ def para(
     y: float,
     w: float,
     h: float,
-    size=17,
+    size: float = 12,
     color=MUTED,
-    bold=False,
+    bold: bool = False,
 ) -> None:
     style = ParagraphStyle(
         "rf",
         fontName="RF-Bold" if bold else "RF-Regular",
         fontSize=size,
-        leading=size * 1.32,
+        leading=size * 1.28,
         textColor=color,
         alignment=TA_LEFT,
         spaceAfter=0,
     )
-    p = Paragraph(value, style)
-    p.wrapOn(c, w, h)
-    p.drawOn(c, x, y + h - p.height)
+    paragraph = Paragraph(value, style)
+    paragraph.wrapOn(c, w, h)
+    paragraph.drawOn(c, x, y + h - paragraph.height)
 
 
 def page_base(c: canvas.Canvas, number: int, section: str) -> None:
@@ -79,314 +93,492 @@ def page_base(c: canvas.Canvas, number: int, section: str) -> None:
     c.rect(0, 0, W, H, fill=1, stroke=0)
     c.setFillColor(HexColor("#122d50"))
     c.circle(W - 30 * mm, H + 5 * mm, 62 * mm, fill=1, stroke=0)
-    text(c, section.upper(), 16 * mm, H - 14 * mm, 10, CYAN, True)
-    text(c, "GOAI 2026 · AGENT INFRA", W - 68 * mm, H - 14 * mm, 9, MUTED, True)
+    text(c, section.upper(), 16 * mm, H - 14 * mm, 9, CYAN, True)
+    text(c, "GOAI 2026 / AGENT INFRA", W - 69 * mm, H - 14 * mm, 8.5, MUTED, True)
     text(c, f"{number:02d}", W - 18 * mm, 9 * mm, 9, MUTED, True)
 
 
-def metric_card(c: canvas.Canvas, x: float, y: float, title: str, value: str, color=CYAN) -> None:
-    box(c, x, y, 72 * mm, 39 * mm)
-    text(c, title.upper(), x + 6 * mm, y + 27 * mm, 8.5, MUTED, True)
-    text(c, value, x + 6 * mm, y + 10 * mm, 25, color, True)
+def metric_card(
+    c: canvas.Canvas,
+    x: float,
+    y: float,
+    title: str,
+    value: str,
+    detail: str,
+    color=CYAN,
+) -> None:
+    box(c, x, y, 72 * mm, 47 * mm)
+    text(c, title.upper(), x + 6 * mm, y + 36 * mm, 8, MUTED, True)
+    text(c, value, x + 6 * mm, y + 19 * mm, 23, color, True)
+    para(c, detail, x + 6 * mm, y + 3 * mm, 60 * mm, 11 * mm, 7.5, MUTED)
 
 
-def build() -> None:
+def _pct(value: float | None) -> str:
+    return "N/A" if value is None else f"{float(value):.0%}"
+
+
+def _count(value: float | None) -> str:
+    return "N/A" if value is None else f"{int(value):,}"
+
+
+def build(
+    output: Path = DEFAULT_OUTPUT,
+    *,
+    allow_incomplete_preview: bool = False,
+) -> dict[str, Any]:
+    contract = build_presentation_contract(ROOT)
+    require_presentation_render(
+        ROOT,
+        contract,
+        [output],
+        allow_incomplete_preview=allow_incomplete_preview,
+    )
     setup_fonts()
-    benchmark = json.loads((ROOT / "artifacts/benchmark.json").read_text(encoding="utf-8"))
-    profiles = {item["profile"]: item for item in benchmark["profiles"]}
-    full = profiles["full"]
-    OUTPUT.parent.mkdir(parents=True, exist_ok=True)
-    c = canvas.Canvas(str(OUTPUT), pagesize=PAGE, pageCompression=1)
-    c.setTitle("RemedyFabric - GOAI 2026 Agent Infra Proposal")
-    c.setAuthor("Oxygen56")
+    statuses = contract["statuses"]
+    metrics = contract["metrics"]
+    topology = contract["topology"]["recovery_role_counts"]
+    agentteams_valid = statuses["agentteams"]
+    clean_passed = statuses["clean"]
+    evidence_complete = statuses["evidence_complete"]
 
-    page_base(c, 1, "Evidence-first recovery infrastructure")
+    output.parent.mkdir(parents=True, exist_ok=True)
+    # Uncompressed page streams keep text inspection portable across PDF tools;
+    # embedded fonts remain subsetted and the file is still comfortably small.
+    c = canvas.Canvas(str(output), pagesize=PAGE, pageCompression=0, invariant=1)
+    c.setTitle("RemedyFabric - GOAI 2026 Agent Infra Champion Proposal")
+    c.setAuthor("Oxygen56")
+    c.setSubject("Faulty-Agent-resistant autonomous recovery infrastructure")
+    c.setKeywords(
+        "RemedyFabric GOAI 2026 Agent Infra evidence-bound proposal "
+        + contract["presentation_contract_sha256"]
+    )
+
+    page_base(c, 1, "Faulty-Agent-resistant recovery")
     text(c, "RemedyFabric", 18 * mm, H - 52 * mm, 42, WHITE, True)
     para(
         c,
-        "Autonomous software repair that can prove what changed, why it was allowed, and whether the system actually recovered.",
+        "Autonomous repair that remains safe when a repair Agent crashes, hallucinates, "
+        "equivocates, replays evidence, or crosses its role boundary.",
         18 * mm,
-        H - 96 * mm,
-        208 * mm,
+        H - 97 * mm,
+        205 * mm,
         32 * mm,
-        20,
+        19,
         MUTED,
     )
     text(
         c,
-        "Diagnose → Propose → Govern → Verify → Commit or Roll back",
+        "No single Worker can authorize release.",
         18 * mm,
         H - 116 * mm,
-        15,
+        16,
         CYAN,
         True,
     )
-    box(c, 246 * mm, 31 * mm, 72 * mm, 93 * mm)
-    text(c, "TARGET", 254 * mm, 108 * mm, 9, MUTED, True)
+    box(c, 240 * mm, 29 * mm, 80 * mm, 101 * mm)
+    text(c, "PRE-FREEZE EVIDENCE SET", 248 * mm, 113 * mm, 9, MUTED, True)
+    status = "EVIDENCE COMPLETE" if evidence_complete else "BUILD IN PROGRESS"
+    text(c, status, 248 * mm, 95 * mm, 17, CYAN if evidence_complete else AMBER, True)
     para(
         c,
-        "Agent Infra champion<br/>and overall grand prize",
-        254 * mm,
-        71 * mm,
-        56 * mm,
+        "AgentTeams official runtime: "
+        + ("validated" if agentteams_valid else "pending final wiring; not claimed complete")
+        + "<br/>Clean wheel replay: "
+        + (
+            "isolated package replay passed"
+            if clean_passed
+            else "pending; excluded from completed claims"
+        ),
+        248 * mm,
+        53 * mm,
+        64 * mm,
         32 * mm,
-        18,
+        11,
         WHITE,
-        True,
     )
-    text(c, "Apache-2.0", 254 * mm, 53 * mm, 12, AMBER, True)
-    text(c, "Offline demo · USD 0.00", 254 * mm, 40 * mm, 10, CYAN, True)
+    text(c, "Apache-2.0 / public repository", 248 * mm, 40 * mm, 9.5, MUTED, True)
     c.showPage()
 
-    page_base(c, 2, "Problem and value")
-    text(c, "Plausible patches are not recovery evidence", 18 * mm, H - 40 * mm, 30, WHITE, True)
+    page_base(c, 2, "The infrastructure gap")
+    text(c, "A repair Agent can become the incident", 18 * mm, H - 40 * mm, 29, WHITE, True)
     items = [
         (
-            "Repair generator",
-            "Can propose a convincing change, but should not approve or commit itself.",
+            "Plausible output",
+            "A convincing patch can be unsafe, stale, or scoped beyond permission.",
         ),
+        ("Correlated checks", "More votes do not help when every role trusts the same evidence."),
         (
-            "Operational risk",
-            "A test may pass while invariants fail; a valid fix may hide an unauthorized workflow or credential change.",
-        ),
-        (
-            "Infrastructure gap",
-            "Teams need a provider-neutral layer for blast radius, independent verification, rollback, receipts, and metrics.",
+            "Unclear terminal state",
+            "A timeout must end in a verified release or byte-exact restore.",
         ),
     ]
-    for idx, (title, body) in enumerate(items):
-        y = H - (74 + idx * 36) * mm
-        box(c, 18 * mm, y, 200 * mm, 29 * mm)
-        text(c, f"0{idx + 1}", 25 * mm, y + 17 * mm, 15, CYAN, True)
-        text(c, title, 45 * mm, y + 18 * mm, 14, WHITE, True)
-        para(c, body, 45 * mm, y + 3 * mm, 163 * mm, 13 * mm, 10, MUTED)
-    box(c, 233 * mm, H - 148 * mm, 85 * mm, 98 * mm)
-    text(c, "SUCCESS CONTRACT", 241 * mm, H - 66 * mm, 10, AMBER, True)
+    for index, (title, body) in enumerate(items):
+        y = H - (75 + index * 36) * mm
+        box(c, 18 * mm, y, 205 * mm, 29 * mm)
+        text(c, f"0{index + 1}", 25 * mm, y + 16 * mm, 15, CYAN, True)
+        text(c, title, 45 * mm, y + 17 * mm, 14, WHITE, True)
+        para(c, body, 45 * mm, y + 3 * mm, 166 * mm, 12 * mm, 10, MUTED)
+    box(c, 237 * mm, 40 * mm, 83 * mm, 100 * mm)
+    text(c, "WINNING CONTRACT", 245 * mm, 123 * mm, 10, AMBER, True)
     para(
         c,
-        "A judge clones the repository, runs one command without credentials, observes both repairs and adversarial rejection, verifies the ledger, and reproduces every number.",
-        241 * mm,
-        H - 127 * mm,
-        68 * mm,
-        53 * mm,
-        14,
+        "Within the declared one-Worker Byzantine-like boundary: recover without unsafe "
+        "release. Beyond it: refuse release and restore. Every decision binds run, snapshot, "
+        "candidate and evidence digests.",
+        245 * mm,
+        56 * mm,
+        67 * mm,
+        58 * mm,
+        13,
         WHITE,
         True,
     )
     c.showPage()
 
-    page_base(c, 3, "AgentTeams-aligned loop")
+    page_base(c, 3, "Role-separated release quorum")
     text(
-        c,
-        "Four specialized Workers, one controlled transaction",
-        18 * mm,
-        H - 40 * mm,
-        29,
-        WHITE,
-        True,
+        c, "Role-separated identities and release authority", 18 * mm, H - 40 * mm, 28, WHITE, True
     )
-    agents = [
-        ("TRIAGE", "Reproduce\nand diagnose"),
-        ("REPAIR", "Typed patch\nSkill"),
-        ("GOVERN", "Fail-closed\npolicy"),
-        ("VERIFY", "Tests and\ninvariants"),
+    roles = [
+        (
+            f"{_count(topology.get('worker'))} WORKERS",
+            f"{_count(contract['topology'].get('proposal_quorum'))} matching proposals",
+            CYAN,
+        ),
+        (
+            f"{_count(topology.get('verifier'))} VERIFIERS",
+            f"{_count(contract['topology'].get('verifier_quorum'))} logically distinct approvals",
+            CYAN,
+        ),
+        ("CHALLENGER", "negative-control evidence", AMBER),
+        ("GOVERNOR", "policy and permission", AMBER),
+        ("RELEASE MANAGER", "only role that requests release", WHITE),
     ]
-    for idx, (name, body) in enumerate(agents):
-        x = (18 + idx * 78) * mm
-        box(c, x, 65 * mm, 66 * mm, 63 * mm)
-        c.setFillColor(CYAN)
-        c.circle(x + 12 * mm, 113 * mm, 6 * mm, fill=1, stroke=0)
-        text(c, str(idx + 1), x + 10.4 * mm, 110.5 * mm, 11, BG, True)
-        text(c, name, x + 8 * mm, 93 * mm, 17, WHITE, True)
-        para(c, body.replace("\n", "<br/>"), x + 8 * mm, 70 * mm, 48 * mm, 18 * mm, 13, MUTED)
-        if idx < 3:
-            c.setStrokeColor(AMBER)
-            c.setLineWidth(2.5)
-            c.line(x + 66 * mm, 96 * mm, x + 77 * mm, 96 * mm)
+    for index, (title, detail, color) in enumerate(roles):
+        x = (18 + index * 61) * mm
+        box(c, x, 67 * mm, 53 * mm, 62 * mm)
+        text(c, str(index + 1), x + 7 * mm, 113 * mm, 20, color, True)
+        text(c, title, x + 7 * mm, 94 * mm, 10, WHITE, True)
+        para(c, detail, x + 7 * mm, 73 * mm, 39 * mm, 16 * mm, 9.5, MUTED)
+        if index < 4:
+            c.setStrokeColor(LINE)
+            c.setLineWidth(2)
+            c.line(x + 53 * mm, 98 * mm, x + 60 * mm, 98 * mm)
     para(
         c,
-        "Manager snapshots the workspace, applies only approved typed edits, then commits or restores every file byte-for-byte. Shared structured state plus the hash-chained ledger provide the required context and observability mechanisms.",
+        "Default release equation: 2 Worker proposals + 2 Verifiers + 1 Challenger + 1 Governor "
+        "+ registered Release Manager. Duplicate identities do not inflate quorum; rejection, "
+        "equivocation, stale context, forged or replayed evidence selects rollback. The local "
+        "matrix uses logically distinct identities and isolated clones; shared implementation or "
+        "provider failures are outside its one-Worker claim.",
         18 * mm,
-        28 * mm,
-        300 * mm,
         25 * mm,
-        13,
+        300 * mm,
+        27 * mm,
+        12,
         MUTED,
     )
     c.showPage()
 
-    page_base(c, 4, "Safety and failure recovery")
+    page_base(c, 4, "Executable fault evidence")
     text(
         c,
-        "The safest autonomous action is sometimes no action",
+        "Recovery survives one faulty Worker in the tested matrix",
         18 * mm,
         H - 40 * mm,
-        29,
+        27,
         WHITE,
         True,
     )
-    protections = [
-        ("Visible-test overfit", "ROLL BACK", AMBER),
-        ("Delete tests or invariants", "BLOCK", RED),
-        ("Modify CI / repository policy", "BLOCK", RED),
-        ("Escape workspace or introduce a secret", "BLOCK", RED),
-    ]
-    for idx, (probe, outcome, color) in enumerate(protections):
-        y = H - (72 + idx * 27) * mm
-        box(c, 18 * mm, y, 210 * mm, 21 * mm, 4 * mm)
-        text(c, probe, 25 * mm, y + 7 * mm, 13, WHITE, True)
-        text(c, outcome, 184 * mm, y + 7 * mm, 12, color, True)
-    box(c, 242 * mm, 43 * mm, 76 * mm, 95 * mm)
-    text(c, "DEFENSE IN DEPTH", 250 * mm, 122 * mm, 10, CYAN, True)
-    para(
-        c,
-        "No shell<br/>Scrubbed environment<br/>Bounded timeout<br/>Protected paths<br/>Old-content precondition<br/>Independent invariants<br/>Byte-exact restore<br/>Hash-chain receipts",
-        250 * mm,
-        54 * mm,
-        60 * mm,
-        62 * mm,
-        12,
-        WHITE,
-    )
-    c.showPage()
-
-    page_base(c, 5, "Verified benchmark")
     text(
         c,
-        "Every headline number comes from the current artifact",
+        f"{_count(metrics['trial_count'])} executable trials",
         18 * mm,
-        H - 40 * mm,
-        29,
-        WHITE,
-        True,
-    )
-    metric_card(c, 18 * mm, 103 * mm, "Task success", f"{full['task_success_rate']:.0%}")
-    metric_card(c, 96 * mm, 103 * mm, "Recovery success", f"{full['recovery_success_rate']:.0%}")
-    metric_card(
-        c, 174 * mm, 103 * mm, "Unsafe commits", f"{full['safety_violation_rate']:.0%}", CYAN
-    )
-    metric_card(c, 252 * mm, 103 * mm, "Valid ledgers", f"{full['ledger_integrity_rate']:.0%}")
-    headers = ["Profile", "Task success", "Recovery", "Safety violations", "Rollback"]
-    xs = [20, 92, 145, 200, 266]
-    for x, header in zip(xs, headers):
-        text(c, header.upper(), x * mm, 88 * mm, 8, MUTED, True)
-    for row, profile in enumerate(benchmark["profiles"]):
-        y = (76 - row * 10) * mm
-        values = [
-            profile["profile"],
-            f"{profile['task_success_rate']:.1%}",
-            f"{profile['recovery_success_rate']:.1%}",
-            f"{profile['safety_violation_rate']:.1%}",
-            f"{profile['rollback_success_rate']:.1%}",
-        ]
-        for x, value in zip(xs, values):
-            text(c, value, x * mm, y, 10, WHITE if row == 0 else MUTED, row == 0)
-    para(
-        c,
-        "Scope: eight transparent authored deterministic incidents. These results prove the published mechanisms on this commit; they do not claim production adoption, external benchmark superiority, or universal repair coverage.",
-        18 * mm,
-        7 * mm,
-        300 * mm,
-        16 * mm,
+        H - 53 * mm,
         10,
         MUTED,
+        True,
     )
-    c.showPage()
-
-    page_base(c, 6, "Skill and ecosystem reuse")
-    text(c, "Provider-neutral core, reusable Skill boundary", 18 * mm, H - 40 * mm, 29, WHITE, True)
-    columns = [
-        (
-            "INPUT",
-            "Incident ID\nIsolated workspace\nReproduction command\nFailure evidence\nAllowed and protected paths",
-        ),
-        (
-            "PATCH CANDIDATE",
-            "Skill and version\nDiagnosis and confidence\nRelative paths\nComplete old and new content\nReason and provider cost",
-        ),
-        (
-            "INDEPENDENT CONTROL",
-            "Governor approval\nVerifier receipt\nCommit or rollback\nLedger hash\nTerminal outcome",
-        ),
-    ]
-    for idx, (title, body) in enumerate(columns):
-        x = (18 + idx * 102) * mm
-        box(c, x, 56 * mm, 90 * mm, 83 * mm)
-        text(c, title, x + 8 * mm, 123 * mm, 11, CYAN if idx != 1 else AMBER, True)
-        para(c, body.replace("\n", "<br/>"), x + 8 * mm, 66 * mm, 74 * mm, 49 * mm, 13, WHITE)
-    text(
+    metric_card(
         c,
-        "Official AgentTeams CRDs included · local zero-credential runtime mirrors the same roles",
         18 * mm,
-        36 * mm,
-        13,
+        101 * mm,
+        "One-fault recovery",
+        _pct(metrics["single_worker_recovery_rate"]),
+        f"{_count(metrics['single_worker_trials'])} executable trials",
+    )
+    metric_card(
+        c,
+        96 * mm,
+        101 * mm,
+        "Unsafe releases",
+        _count(metrics["single_worker_unsafe_releases"]),
+        "within one-Worker tested boundary",
+    )
+    metric_card(
+        c,
+        174 * mm,
+        101 * mm,
+        "Overflow fail closed",
+        _pct(metrics["overflow_fail_closed_rate"]),
+        f"{_count(metrics['overflow_trials'])} enumerated trials",
+    )
+    metric_card(
+        c,
+        252 * mm,
+        101 * mm,
+        "Explored states",
+        _count(metrics["checked_decisions"]),
+        "finite exhaustive model",
+    )
+    box(c, 18 * mm, 34 * mm, 300 * mm, 50 * mm)
+    text(c, "INJECTED CLASSES", 27 * mm, 69 * mm, 9, CYAN, True)
+    para(
+        c,
+        "crash / timeout / unsafe patch / equivocation / forged proposal or evidence / replay / "
+        "context mismatch / role impersonation",
+        27 * mm,
+        49 * mm,
+        130 * mm,
+        16 * mm,
+        12,
         WHITE,
         True,
     )
-    text(
+    text(c, "CLAIM BOUNDARY", 178 * mm, 69 * mm, 9, AMBER, True)
+    para(
         c,
-        "Alibaba Cloud Skills are an optional declared integration; baseline evidence does not pretend a live cloud run.",
-        18 * mm,
-        24 * mm,
-        11,
+        "Finite one-Worker Byzantine-like model with trusted membership and role-separated "
+        "logical controls. Correlated implementation/provider failure is out of scope. "
+        "Not general BFT, cryptographic identity, host security, or production safety proof.",
+        178 * mm,
+        45 * mm,
+        129 * mm,
+        20 * mm,
+        10.5,
         MUTED,
     )
     c.showPage()
 
-    page_base(c, 7, "GOAI score coverage")
-    text(c, "Artifacts mapped to every official dimension", 18 * mm, H - 40 * mm, 29, WHITE, True)
+    page_base(c, 5, "AgentFaultBench-OSS")
+    text(
+        c,
+        "Real provenance; explicit protocol-simulation boundary",
+        18 * mm,
+        H - 40 * mm,
+        28,
+        WHITE,
+        True,
+    )
+    metric_card(
+        c,
+        18 * mm,
+        101 * mm,
+        "Cases",
+        _count(metrics["case_count"]),
+        "merged OSS PR identities",
+    )
+    metric_card(
+        c,
+        96 * mm,
+        101 * mm,
+        "Repositories",
+        _count(metrics["repository_count"]),
+        "official GitHub REST verified",
+    )
+    metric_card(
+        c,
+        174 * mm,
+        101 * mm,
+        "Languages",
+        _count(metrics["language_count"]),
+        "Python / JavaScript / Rust",
+    )
+    metric_card(
+        c,
+        252 * mm,
+        101 * mm,
+        "Fault classes",
+        _count(metrics["fault_attack_count"]),
+        "all case transformations named",
+    )
+    box(c, 18 * mm, 29 * mm, 144 * mm, 56 * mm)
+    text(c, "CHAMPION PROTOCOL RESULT", 27 * mm, 68 * mm, 9, CYAN, True)
+    para(
+        c,
+        f"{_count(metrics['faultbench_single_fault_cases'])} within-boundary cases; safe recovery "
+        f"{_pct(metrics['faultbench_single_fault_recovery_rate'])}<br/>"
+        f"Unsafe release {_pct(metrics['faultbench_single_fault_unsafe_release_rate'])}<br/>"
+        f"{_count(metrics['faultbench_overflow_cases'])} overflow/control-plane cases; containment "
+        f"{_pct(metrics['faultbench_overflow_containment_rate'])}",
+        27 * mm,
+        39 * mm,
+        125 * mm,
+        24 * mm,
+        13,
+        WHITE,
+        True,
+    )
+    box(c, 175 * mm, 29 * mm, 143 * mm, 56 * mm)
+    text(c, "WHAT WAS ACTUALLY EXECUTED", 184 * mm, 68 * mm, 9, AMBER, True)
+    para(
+        c,
+        f"{_count(metrics['micro_fixture_count'])} independent extracted semantics passed. The "
+        f"{_count(metrics['case_count'])} upstream "
+        "repos were not cloned, repaired, or tested end-to-end; these are typed-message "
+        f"evaluations, not {_count(metrics['case_count'])} autonomous repair successes.",
+        184 * mm,
+        37 * mm,
+        124 * mm,
+        27 * mm,
+        10.5,
+        MUTED,
+    )
+    c.showPage()
+
+    page_base(c, 6, "Evidence and reproducibility")
+    text(
+        c, "Every green claim has a machine-readable receipt", 18 * mm, H - 40 * mm, 28, WHITE, True
+    )
     rows = [
         (
-            "25%",
-            "Scenario and replication",
-            "Cross-team repository recovery; one-command offline run",
+            "GitHub provenance",
+            statuses["sources"],
+            f"{_count(metrics['case_count'])}/{_count(metrics['case_count'])} cases; source receipt is evidence-bound",
         ),
-        ("25%", "Multi-Agent closed loop", "Four Workers, Manager, terminal commit/block/rollback"),
+        (
+            "Micro-replays",
+            statuses["micro"],
+            (
+                f"{_count(metrics['micro_fixture_count'])} fixtures, "
+                f"{_count(metrics['language_count'])} languages"
+            ),
+        ),
+        (
+            "Container isolation",
+            statuses["isolation"],
+            "network none, read-only rootfs, no capabilities, bounded resources",
+        ),
+        (
+            "Clean wheel replay",
+            clean_passed,
+            (
+                "isolated package replay passed; not evidence for a later package"
+                if clean_passed
+                else "pending - no completion claim"
+            ),
+        ),
+        (
+            "Official AgentTeams",
+            agentteams_valid,
+            f"validated live receipt; {contract['topology']['official_agentteams_worker_count']} Worker containers"
+            if agentteams_valid
+            else "pending final runtime wiring - no completion claim",
+        ),
+    ]
+    for index, (name, passed, detail) in enumerate(rows):
+        y = H - (64 + index * 22) * mm
+        box(c, 18 * mm, y, 300 * mm, 17 * mm, 3 * mm)
+        text(
+            c,
+            "VERIFIED" if passed else "PENDING",
+            25 * mm,
+            y + 5.7 * mm,
+            8.5,
+            CYAN if passed else AMBER,
+            True,
+        )
+        text(c, name, 63 * mm, y + 5.5 * mm, 11, WHITE, True)
+        para(c, detail, 128 * mm, y + 2.8 * mm, 180 * mm, 10 * mm, 8.8, MUTED)
+    para(
+        c,
+        "The local container probe is one execution, not a claim about every platform. Public CI, "
+        "official cloud API calls, production use and external reliability are separate facts.",
+        18 * mm,
+        17 * mm,
+        300 * mm,
+        14 * mm,
+        9.5,
+        MUTED,
+    )
+    c.showPage()
+
+    page_base(c, 7, "GOAI score mapping")
+    text(
+        c,
+        "The standout mechanism maps to every scoring dimension",
+        18 * mm,
+        H - 40 * mm,
+        28,
+        WHITE,
+        True,
+    )
+    score_rows = [
+        ("25%", "Scenario value", "Repair infrastructure remains safe when its own Agents fail."),
         (
             "25%",
-            "Skill engineering and reuse",
-            "Versioned typed Skill; provider replacement contract",
+            "Multi-Agent loop",
+            "Workers, Verifiers, Challenger, Governor and Release Manager.",
+        ),
+        (
+            "25%",
+            "Skill and ecosystem",
+            "Typed PatchCandidate/Attestation contracts; reusable recovery Skill.",
         ),
         (
             "20%",
-            "Engineering, safety and audit",
-            "Policy, invariants, rollback, receipts, tests, ablations",
+            "Engineering and safety",
+            "Quorum, rollback, isolation, receipts, model exploration, negative controls.",
         ),
-        ("5%", "Open contribution", "Apache-2.0 source, fixtures, docs, dashboard and CRDs"),
+        (
+            "5%",
+            "Open contribution",
+            "Apache-2.0 code, benchmark corpus, fixtures, docs and evidence dashboard.",
+        ),
     ]
-    for idx, (weight, title, evidence) in enumerate(rows):
-        y = H - (63 + idx * 21) * mm
-        text(c, weight, 20 * mm, y + 6 * mm, 16, CYAN, True)
-        text(c, title, 48 * mm, y + 7 * mm, 13, WHITE, True)
-        text(c, evidence, 133 * mm, y + 7 * mm, 11, MUTED)
+    for index, (weight, title, evidence) in enumerate(score_rows):
+        y = H - (64 + index * 23) * mm
+        text(c, weight, 20 * mm, y + 5 * mm, 15, CYAN, True)
+        text(c, title, 52 * mm, y + 5.5 * mm, 12, WHITE, True)
+        para(c, evidence, 130 * mm, y + 2 * mm, 180 * mm, 12 * mm, 9.8, MUTED)
         c.setStrokeColor(LINE)
-        c.line(18 * mm, y, 317 * mm, y)
-    text(c, "Claim boundary", 20 * mm, 20 * mm, 11, AMBER, True)
+        c.line(18 * mm, y, 318 * mm, y)
     para(
         c,
-        "Artifact coverage is not a predicted judge score. Local execution, live AgentTeams deployment, public CI, official submission and production adoption are reported separately.",
-        58 * mm,
-        5 * mm,
-        255 * mm,
-        13 * mm,
-        10,
-        MUTED,
+        "Coverage mapping is not a predicted score or award guarantee.",
+        20 * mm,
+        20 * mm,
+        295 * mm,
+        10 * mm,
+        9.5,
+        AMBER,
+        True,
     )
     c.showPage()
 
-    page_base(c, 8, "Reproduce and inspect")
-    text(c, "Evidence before claims", 18 * mm, H - 44 * mm, 36, WHITE, True)
-    box(c, 18 * mm, 57 * mm, 210 * mm, 80 * mm)
-    commands = [
-        "$ python -m pip install -e .",
-        "$ python -m unittest discover -s tests -v",
-        "$ remedyfabric benchmark --output artifacts/benchmark.json",
-        "$ remedyfabric report --benchmark artifacts/benchmark.json",
-    ]
-    for idx, command in enumerate(commands):
-        text(c, command, 27 * mm, (120 - idx * 15) * mm, 12, CYAN if idx == 0 else WHITE, idx == 0)
-    text(c, "github.com/Oxygen56/remedyfabric", 20 * mm, 38 * mm, 18, CYAN, True)
-    text(c, "Apache-2.0 · Python 3.11+ · no API key required", 20 * mm, 25 * mm, 11, MUTED)
+    page_base(c, 8, "Five-minute judge path")
+    text(c, "Clone. Run. Inspect the receipts.", 18 * mm, H - 42 * mm, 32, WHITE, True)
+    box(c, 18 * mm, 52 * mm, 214 * mm, 88 * mm)
+    commands = [f"$ {command}" for command in REPRODUCTION_COMMANDS]
+    for index, command in enumerate(commands):
+        text(
+            c,
+            command,
+            27 * mm,
+            (122 - index * 14) * mm,
+            10.5,
+            CYAN if index == 0 else WHITE,
+            index == 0,
+        )
+    text(c, "github.com/Oxygen56/remedyfabric", 20 * mm, 35 * mm, 16, CYAN, True)
+    text(
+        c,
+        "Apache-2.0 / Python 3.11+ / deterministic zero-credential path",
+        20 * mm,
+        23 * mm,
+        10,
+        MUTED,
+    )
     code = qr.QrCodeWidget("https://github.com/Oxygen56/remedyfabric")
     bounds = code.getBounds()
     drawing = Drawing(
@@ -402,11 +594,74 @@ def build() -> None:
         ],
     )
     drawing.add(code)
-    renderPDF.draw(drawing, c, 250 * mm, 61 * mm)
-    text(c, "Repository and evidence", 252 * mm, 49 * mm, 11, WHITE, True)
+    c.setFillColor(WHITE)
+    c.roundRect(248 * mm, 62 * mm, 68 * mm, 68 * mm, 3 * mm, fill=1, stroke=0)
+    renderPDF.draw(drawing, c, 251 * mm, 65 * mm)
+    text(c, "Repository and evidence", 251 * mm, 53 * mm, 10.5, WHITE, True)
+    c.showPage()
+
+    page_base(c, 9, "Disclosure and claim boundary")
+    text(c, "What a judge may safely conclude", 18 * mm, H - 40 * mm, 29, WHITE, True)
+    box(c, 18 * mm, 49 * mm, 142 * mm, 92 * mm)
+    text(c, "SUPPORTED", 27 * mm, 123 * mm, 10, CYAN, True)
+    para(
+        c,
+        f"- {_count(metrics['trial_count'])} executable fault-matrix trials<br/>- "
+        f"{_count(metrics['checked_decisions'])} finite model decisions<br/>- "
+        f"{_count(metrics['case_count'])} public provenance records verified<br/>- "
+        f"{_count(metrics['micro_fixture_count'])} extracted semantics executed<br/>- "
+        "one Docker isolation probe<br/>- "
+        "explicit cost/provider boundaries",
+        27 * mm,
+        63 * mm,
+        122 * mm,
+        54 * mm,
+        12,
+        WHITE,
+    )
+    box(c, 176 * mm, 49 * mm, 142 * mm, 92 * mm)
+    text(c, "NOT CLAIMED", 185 * mm, 123 * mm, 10, AMBER, True)
+    para(
+        c,
+        "- general Byzantine consensus<br/>- cryptographic workload identity<br/>- "
+        f"{_count(metrics['case_count'])} autonomous OSS repairs<br/>- production adoption or reliability<br/>- "
+        "third-party certification<br/>- external SOTA or guaranteed rank<br/>- "
+        "cloud API use unless a live receipt says so",
+        185 * mm,
+        60 * mm,
+        122 * mm,
+        58 * mm,
+        11.5,
+        WHITE,
+    )
+    text(c, "MACHINE-READABLE EVIDENCE", 20 * mm, 34 * mm, 8, MUTED, True)
+    text(c, "artifacts/champion-evidence.json", 20 * mm, 21 * mm, 10, CYAN, True)
     c.save()
-    print(OUTPUT)
+    return {
+        "output": str(output),
+        "pages": 9,
+        "agentteams_validated": agentteams_valid,
+        "clean_replay_passed": clean_passed,
+        "pre_freeze_evidence_complete": evidence_complete,
+        "presentation_contract_sha256": contract["presentation_contract_sha256"],
+    }
+
+
+def main() -> int:
+    parser = argparse.ArgumentParser(description=__doc__)
+    parser.add_argument("--output", type=Path, default=DEFAULT_OUTPUT)
+    parser.add_argument("--allow-incomplete-preview", action="store_true")
+    args = parser.parse_args()
+    output = args.output if args.output.is_absolute() else ROOT / args.output
+    print(
+        json.dumps(
+            build(output, allow_incomplete_preview=args.allow_incomplete_preview),
+            ensure_ascii=False,
+            indent=2,
+        )
+    )
+    return 0
 
 
 if __name__ == "__main__":
-    build()
+    raise SystemExit(main())

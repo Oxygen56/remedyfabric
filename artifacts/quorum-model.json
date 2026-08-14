@@ -1,0 +1,68 @@
+{
+  "assumptions": [
+    "membership and one-role-per-actor registration are trusted",
+    "at most one repair worker is Byzantine-like",
+    "control-plane roles are separately registered and authenticated by the runtime",
+    "the checker does not model correlated implementation or provider failure",
+    "SHA-256 fingerprints bind evidence but are not actor signatures",
+    "this is exhaustive state exploration, not a formal BFT consensus proof"
+  ],
+  "authorized_decisions": 14,
+  "checked_decisions": 20748,
+  "properties": {
+    "control_equivocation_cannot_authorize": {
+      "examples": [],
+      "holds": true,
+      "violation_count": 0
+    },
+    "equivocation_cannot_authorize": {
+      "examples": [],
+      "holds": true,
+      "violation_count": 0
+    },
+    "forged_or_replayed_evidence_cannot_authorize": {
+      "examples": [],
+      "holds": true,
+      "violation_count": 0
+    },
+    "rejection_cannot_be_overridden": {
+      "examples": [],
+      "holds": true,
+      "violation_count": 0
+    },
+    "single_worker_cannot_authorize": {
+      "examples": [],
+      "holds": true,
+      "violation_count": 0
+    },
+    "worker_cannot_request_release": {
+      "examples": [],
+      "holds": true,
+      "violation_count": 0
+    }
+  },
+  "schema_version": 1,
+  "state_space": {
+    "candidates": 2,
+    "challengers": 1,
+    "control_states_each": [
+      "absent",
+      "approve",
+      "reject"
+    ],
+    "governors": 1,
+    "requesters": [
+      "release-1",
+      "worker-1"
+    ],
+    "verifiers": 2,
+    "worker_states_each": [
+      "absent",
+      "safe",
+      "unsafe",
+      "equivocate"
+    ],
+    "workers": 3
+  },
+  "status": "safe-within-model"
+}

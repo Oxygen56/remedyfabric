@@ -1,0 +1,12 @@
+{
+  "case_id": "axum-3848",
+  "repository": "tokio-rs/axum",
+  "language": "Rust",
+  "license": "MIT",
+  "pull_request": "https://github.com/tokio-rs/axum/pull/3848",
+  "fixed_commit": "3f06eadb1da3a6d8aa6c6b9caf4bb9d09606c7af",
+  "public_diff": "https://github.com/tokio-rs/axum/pull/3848.diff",
+  "upstream_file": "axum-extra/src/response/attachment.rs",
+  "extracted_semantic_change": "Reject a HeaderValue-like opaque byte sequence when it cannot be represented as UTF-8 text.",
+  "boundary": "This independently written byte-validation fixture replays one observable semantic only; it does not import axum or execute any upstream test."
+}

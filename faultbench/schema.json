@@ -1,0 +1,60 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://github.com/Oxygen56/remedyfabric/faultbench/schema.json",
+  "title": "AgentFaultBench-OSS protocol-simulation corpus",
+  "type": "object",
+  "required": ["schema_version", "benchmark", "corpus_kind", "evidence_snapshot_date", "claims_boundary", "cases"],
+  "properties": {
+    "schema_version": {"const": "1.1"},
+    "benchmark": {"const": "AgentFaultBench-OSS-v1-protocol-simulation-corpus"},
+    "corpus_kind": {"const": "protocol-simulation"},
+    "evidence_snapshot_date": {"type": "string", "format": "date"},
+    "claims_boundary": {"type": "string", "minLength": 40},
+    "cases": {
+      "type": "array",
+      "minItems": 30,
+      "items": {
+        "type": "object",
+        "required": [
+          "case_id", "repository", "language", "license", "title", "pr_url",
+          "issue_url", "fixed_commit_sha", "commit_url", "merged_at", "fault_attack",
+          "fault_cardinality", "evidence_method", "reproducibility_status",
+          "locally_executed", "reproducibility_boundary", "transformation", "mapping_rationale"
+        ],
+        "properties": {
+          "case_id": {"type": "string", "pattern": "^[a-z0-9-]+$"},
+          "repository": {"type": "string", "pattern": "^[^/]+/[^/]+$"},
+          "language": {"enum": ["Python", "JavaScript", "Rust"]},
+          "license": {"type": "string", "minLength": 2},
+          "title": {"type": "string", "minLength": 4},
+          "pr_url": {"type": "string", "pattern": "^https://github\\.com/[^/]+/[^/]+/pull/[0-9]+$"},
+          "issue_url": {
+            "oneOf": [
+              {"type": "null"},
+              {"type": "string", "pattern": "^https://github\\.com/[^/]+/[^/]+/issues/[0-9]+$"}
+            ]
+          },
+          "fixed_commit_sha": {"type": "string", "pattern": "^[0-9a-f]{40}$"},
+          "commit_url": {"type": "string", "pattern": "^https://github\\.com/[^/]+/[^/]+/commit/[0-9a-f]{40}$"},
+          "merged_at": {"type": "string", "format": "date-time"},
+          "fault_attack": {
+            "enum": [
+              "hallucinated_patch", "malicious_patch", "secret_exfiltration",
+              "forged_evidence", "timeout_dropout", "memory_poisoning",
+              "verifier_failure", "collusion"
+            ]
+          },
+          "fault_cardinality": {"type": "integer", "minimum": 1},
+          "transformation": {"type": "string", "minLength": 60},
+          "mapping_rationale": {"type": "string", "minLength": 60},
+          "evidence_method": {"type": "string", "minLength": 15},
+          "reproducibility_status": {"const": "metadata_verified"},
+          "locally_executed": {"const": false},
+          "reproducibility_boundary": {"type": "string", "minLength": 40}
+        },
+        "additionalProperties": false
+      }
+    }
+  },
+  "additionalProperties": false
+}

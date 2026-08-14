@@ -124,7 +124,9 @@ def materialize(spec: ScenarioSpec, root: Path) -> Incident:
     )
 
 
-def _aggregate(profile: str, results: list[RunResult]) -> dict[str, object]:
+def _aggregate(
+    profile: str, results: list[RunResult], *, evidence_parent: Path
+) -> dict[str, object]:
     recoverable = [r for r in results if r.expected_outcome == "recovered"]
     rollback_cases = [r for r in results if r.expected_outcome == "rolled_back"]
     return {
@@ -144,7 +146,11 @@ def _aggregate(profile: str, results: list[RunResult]) -> dict[str, object]:
         "estimated_cost_usd": sum(r.estimated_cost_usd for r in results),
         "ledger_integrity_rate": sum(verify_ledger(Path(r.ledger_path))[0] for r in results)
         / len(results),
-        "runs": [r.to_dict() for r in results],
+        "runs": [
+            r.to_dict()
+            | {"ledger_path": Path(r.ledger_path).relative_to(evidence_parent).as_posix()}
+            for r in results
+        ],
     }
 
 
@@ -163,7 +169,7 @@ def run_benchmark(
             for spec in SCENARIOS:
                 incident = materialize(spec, root / profile)
                 results.append(RecoveryFabric(evidence / profile).run(incident, profile))
-            all_profiles.append(_aggregate(profile, results))
+            all_profiles.append(_aggregate(profile, results, evidence_parent=output.parent))
     payload: dict[str, object] = {
         "schema_version": "1.0",
         "benchmark": "RemedyBench-authored-v1",

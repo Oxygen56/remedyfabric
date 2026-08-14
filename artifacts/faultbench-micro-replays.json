@@ -1,0 +1,101 @@
+{
+  "schema_version": "1.0",
+  "status": "passed",
+  "fixture_count": 3,
+  "language_count": 3,
+  "tool_versions": {
+    "python": "3.13.14",
+    "node": "v26.4.0",
+    "rustc": "rustc 1.96.0 (ac68faa20 2026-05-25) (Homebrew)"
+  },
+  "results": [
+    {
+      "passed": true,
+      "returncode": 0,
+      "stdout": "{\"after_expectation_passed\": true, \"before_defect_observed\": true, \"case_id\": \"requests-7308\", \"language\": \"Python\", \"scope\": \"standalone semantic micro-replay; not the Requests test suite\"}\n",
+      "stderr": "",
+      "observed": {
+        "after_expectation_passed": true,
+        "before_defect_observed": true,
+        "case_id": "requests-7308",
+        "language": "Python",
+        "scope": "standalone semantic micro-replay; not the Requests test suite"
+      },
+      "case_id": "requests-7308",
+      "language": "Python",
+      "source": "faultbench/micro_replays/python_requests_7308/replay.py",
+      "source_sha256": "da4acc91ff865cb2cc67a4b9d49e4c6fcadf8fcf66eabe9647c5e5157027ff46",
+      "provenance": {
+        "case_id": "requests-7308",
+        "repository": "psf/requests",
+        "language": "Python",
+        "license": "Apache-2.0",
+        "pull_request": "https://github.com/psf/requests/pull/7308",
+        "fixed_commit": "bc7dd0fc4d56e808bcdd85ac2d797b3107c89259",
+        "public_diff": "https://github.com/psf/requests/pull/7308.diff",
+        "upstream_file": "src/requests/_internal_utils.py",
+        "extracted_semantic_change": "Replace Python regex end anchor $ with absolute end anchor \\Z for header validation.",
+        "boundary": "This independently written fixture replays one observable regex semantic only; it does not import Requests or execute any upstream test."
+      }
+    },
+    {
+      "passed": true,
+      "returncode": 0,
+      "stdout": "{\"case_id\":\"fastify-6838\",\"language\":\"JavaScript\",\"before_defect_observed\":true,\"after_expectation_passed\":true,\"scope\":\"standalone semantic micro-replay; not the Fastify test suite\"}\n",
+      "stderr": "",
+      "observed": {
+        "case_id": "fastify-6838",
+        "language": "JavaScript",
+        "before_defect_observed": true,
+        "after_expectation_passed": true,
+        "scope": "standalone semantic micro-replay; not the Fastify test suite"
+      },
+      "case_id": "fastify-6838",
+      "language": "JavaScript",
+      "source": "faultbench/micro_replays/javascript_fastify_6838/replay.js",
+      "source_sha256": "c11e35abf9d8432d58d4ea23bc4fda8a594ba17c64aedf91651fbc8521174596",
+      "provenance": {
+        "case_id": "fastify-6838",
+        "repository": "fastify/fastify",
+        "language": "JavaScript",
+        "license": "MIT",
+        "pull_request": "https://github.com/fastify/fastify/pull/6838",
+        "fixed_commit": "6682c4f9a76cbb60c372ba5cad9dd2fc6e2fdb51",
+        "public_diff": "https://github.com/fastify/fastify/pull/6838.diff",
+        "upstream_file": "lib/route.js",
+        "extracted_semantic_change": "Normalize a provided HTTP method to uppercase and handle an absent method before router lookup.",
+        "boundary": "This independently written Map-based fixture replays one routing semantic only; it does not import Fastify or execute any upstream test."
+      }
+    },
+    {
+      "passed": true,
+      "returncode": 0,
+      "stdout": "{\"after_expectation_passed\":true,\"before_defect_observed\":true,\"case_id\":\"axum-3848\",\"language\":\"Rust\",\"scope\":\"standalone semantic micro-replay; not the axum test suite\"}\n",
+      "stderr": "",
+      "observed": {
+        "after_expectation_passed": true,
+        "before_defect_observed": true,
+        "case_id": "axum-3848",
+        "language": "Rust",
+        "scope": "standalone semantic micro-replay; not the axum test suite"
+      },
+      "case_id": "axum-3848",
+      "language": "Rust",
+      "source": "faultbench/micro_replays/rust_axum_3848/replay.rs",
+      "source_sha256": "1bae55198e3be5d32a9d5bd781b301816c147204f1d38b7fce5d6e1fd6b0967f",
+      "provenance": {
+        "case_id": "axum-3848",
+        "repository": "tokio-rs/axum",
+        "language": "Rust",
+        "license": "MIT",
+        "pull_request": "https://github.com/tokio-rs/axum/pull/3848",
+        "fixed_commit": "3f06eadb1da3a6d8aa6c6b9caf4bb9d09606c7af",
+        "public_diff": "https://github.com/tokio-rs/axum/pull/3848.diff",
+        "upstream_file": "axum-extra/src/response/attachment.rs",
+        "extracted_semantic_change": "Reject a HeaderValue-like opaque byte sequence when it cannot be represented as UTF-8 text.",
+        "boundary": "This independently written byte-validation fixture replays one observable semantic only; it does not import axum or execute any upstream test."
+      }
+    }
+  ],
+  "claims_boundary": "Each result is a real execution of an independently written semantic micro-replay derived from a linked public diff. No upstream repository was cloned, no upstream dependency was installed, and no complete upstream test suite or repair was run."
+}

@@ -1,0 +1,63 @@
+{
+  "schema_version": "1.0",
+  "project": "RemedyFabric",
+  "track": "GOAI 2026 Agent Infra",
+  "winning_claim": "Safe recovery even when one participating Worker is faulty; fail closed beyond the published boundary.",
+  "submission_policy": {
+    "second_submission": "only_after_all_required_gates_pass",
+    "third_submission": "fatal_correction_only"
+  },
+  "required_gates": {
+    "protocol": {
+      "single_fault_unsafe_release_rate_max": 0.0,
+      "single_fault_relative_recovery_rate_min": 0.9,
+      "beyond_boundary_fail_closed_rate_min": 1.0,
+      "single_worker_can_authorize_release": false,
+      "exhaustive_states_min": 256,
+      "executable_trials_min": 20
+    },
+    "faultbench_oss": {
+      "cases_min": 30,
+      "repositories_min": 6,
+      "languages_min": 3,
+      "fault_classes_min": 8,
+      "provenance_coverage_min": 1.0,
+      "negative_controls_required": true,
+      "micro_replays_min": 3
+    },
+    "agentteams": {
+      "official_runtime_required": true,
+      "manager_worker_trace_required": true,
+      "complete_multi_agent_loop_required": true,
+      "role_acl_evidence_required": true,
+      "official_cloud_skill_invocation_required": true,
+      "structured_shared_context_required": true,
+      "append_only_evidence_trace_required": true,
+      "independent_release_authority_required": true,
+      "bounded_claim_required": true,
+      "official_source_pinned_required": true
+    },
+    "reproducibility": {
+      "core_evidence_semantically_valid_required": true,
+      "clean_environment_run_required": true,
+      "unit_tests_required": true,
+      "benchmark_rerun_required": true,
+      "package_integrity_required": true,
+      "public_ci_required": true,
+      "container_isolation_required": true
+    },
+    "judge_delivery": {
+      "scorecard_required": true,
+      "dashboard_required": true,
+      "proposal_pdf_required": true,
+      "demo_video_required": true,
+      "disclosure_required": true
+    }
+  },
+  "claim_boundaries": [
+    "Fault injection and bounded exhaustive checking are not production reliability evidence.",
+    "Byzantine-like Worker faults are not a claim of a formally proven asynchronous BFT consensus protocol.",
+    "Public OSS historical cases do not establish independent third-party evaluation unless separately audited.",
+    "Passing this contract does not guarantee a competition rank or award."
+  ]
+}
