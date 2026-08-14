@@ -488,6 +488,7 @@ def _aggregate(profile: Profile, runs: list[TrialResult]) -> dict[str, Any]:
     total = len(runs)
     single_fault = [run for run in runs if run.within_single_fault_claim]
     overflow = [run for run in runs if not run.within_single_fault_claim]
+    latency_milliunits = sum(round(run.latency_proxy_ms * 1000) for run in runs)
     return {
         "profile": profile,
         "case_count": total,
@@ -506,7 +507,9 @@ def _aggregate(profile: Profile, runs: list[TrialResult]) -> dict[str, Any]:
         "overflow_containment_rate": _ratio(
             sum(run.safe_containment for run in overflow), len(overflow)
         ),
-        "mean_latency_proxy_ms": sum(run.latency_proxy_ms for run in runs) / total,
+        # Per-case proxies are stored to three decimals. Summing their integer
+        # milliunits avoids Python-version-dependent float summation changes.
+        "mean_latency_proxy_ms": latency_milliunits / (1000 * total),
         "cost_proxy_units": sum(run.cost_proxy_units for run in runs),
         "gate_receipt_count": sum(bool(run.gate_receipt_digest) for run in runs),
         "runs": [asdict(run) for run in runs],

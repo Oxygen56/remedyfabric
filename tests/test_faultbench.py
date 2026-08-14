@@ -66,6 +66,14 @@ class FaultBenchTests(unittest.TestCase):
             self.assertEqual(champion["gate_receipt_count"], 30)
             self.assertEqual(result["protocol_engine"]["outcome_is_label_lookup"], False)
             self.assertEqual(json.loads(output.read_text())["case_count"], 30)
+            for profile in result["profiles"]:
+                expected_milliunits = sum(
+                    round(run["latency_proxy_ms"] * 1000) for run in profile["runs"]
+                )
+                self.assertEqual(
+                    profile["mean_latency_proxy_ms"],
+                    expected_milliunits / (1000 * profile["case_count"]),
+                )
 
     def test_collusion_is_a_real_negative_control_not_a_preassigned_result(self):
         collusion = next(case for case in load_cases(DATASET) if case.fault_cardinality == 2)
